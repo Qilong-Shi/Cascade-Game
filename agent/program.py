@@ -4,6 +4,8 @@
 from referee.game import PlayerColor, Coord, Direction, \
     Action, PlaceAction, MoveAction, EatAction, CascadeAction
 
+from .minimax import minimax
+
 
 class Agent:
     """
@@ -36,23 +38,25 @@ class Agent:
         # technique(s) to determine the best action to take.
 
         # During placement phase (first 8 turns total, 4 per player)
-        if self._turn_count < 4:
-            match self._color:
-                case PlayerColor.RED:
-                    print("Testing: RED is playing a PLACE action")
-                    return PlaceAction(Coord(0, self._turn_count))
-                case PlayerColor.BLUE:
-                    print("Testing: BLUE is playing a PLACE action")
-                    return PlaceAction(Coord(7, self._turn_count))
+        # if self._turn_count < 4:
+        #     match self._color:
+        #         case PlayerColor.RED:
+        #             print("Testing: RED is playing a PLACE action")
+        #             return PlaceAction(Coord(0, self._turn_count))
+        #         case PlayerColor.BLUE:
+        #             print("Testing: BLUE is playing a PLACE action")
+        #             return PlaceAction(Coord(7, self._turn_count))
 
-        # During play phase
-        match self._color:
-            case PlayerColor.RED:
-                print("Testing: RED is playing a MOVE action")
-                return MoveAction(Coord(0, 0), Direction.Down)
-            case PlayerColor.BLUE:
-                print("Testing: BLUE is playing a MOVE action")
-                return MoveAction(Coord(7, 0), Direction.Up)
+        # # During play phase
+        # match self._color:
+        #     case PlayerColor.RED:
+        #         print("Testing: RED is playing a MOVE action")
+        #         return MoveAction(Coord(0, 0), Direction.Down)
+        #     case PlayerColor.BLUE:
+        #         print("Testing: BLUE is playing a MOVE action")
+        #         return MoveAction(Coord(7, 0), Direction.Up)
+        depth = 3
+        return minimax({}, depth, self._color, self._turn_count)[1]
 
     def update(self, color: PlayerColor, action: Action, **referee: dict):
         """

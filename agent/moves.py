@@ -9,6 +9,9 @@ from referee.game import (
     EatAction,
     MoveAction,
     PlayerColor,
+    PLACEMENT_TURNS,
+    MAX_TURNS,
+    PlaceAction
 )
 
 def legal_actions(board: dict[Coord, CellState], color: PlayerColor, turn_count: int) -> list[Action]:
@@ -16,29 +19,45 @@ def legal_actions(board: dict[Coord, CellState], color: PlayerColor, turn_count:
     Generate all legal actions for any coloured stacks.
     """
     actions: list[Action] = []
-    for coord, cell in board.items():
-        if cell.color != color:
-            continue
 
-        for direction in CARDINAL_DIRECTIONS:
-            if cell.height > 1:
-                actions.append(CascadeAction(coord, direction))
+    # During placement phase, can only place on empty cells
+    if turn_count < PLACEMENT_TURNS:
+        # Generate list of all empty coordinates
+        legal_coords = []
+        for r in range(BOARD_N):
+            for c in range(BOARD_N):
+                coord = Coord(r, c)
+                if board.get(coord, CellState()).is_empty:
+                    legal_coords.append(coord)
 
-            target = step(coord, direction)
-            if target is None:
+        # append place action for each legal coordinate
+        for coord in legal_coords:
+            actions.append(PlaceAction(coord))
+    
+    else:
+        for coord, cell in board.items():
+            if cell.color != color:
                 continue
 
-            target_cell = board.get(target, CellState())
+            for direction in CARDINAL_DIRECTIONS:
+                if cell.height > 1:
+                    actions.append(CascadeAction(coord, direction))
 
-            if target_cell.is_empty or target_cell.color == cell.color:
-                actions.append(MoveAction(coord, direction))
+                target = step(coord, direction)
+                if target is None:
+                    continue
 
-            if (
-                not target_cell.is_empty
-                and target_cell.color != cell.color
-                and cell.height >= target_cell.height
-            ):
-                actions.append(EatAction(coord, direction))
+                target_cell = board.get(target, CellState())
+
+                if target_cell.is_empty or target_cell.color == cell.color:
+                    actions.append(MoveAction(coord, direction))
+
+                if (
+                    not target_cell.is_empty
+                    and target_cell.color != cell.color
+                    and cell.height >= target_cell.height
+                ):
+                    actions.append(EatAction(coord, direction))
 
     return actions
 
@@ -166,3 +185,25 @@ def apply_action(board: dict[Coord, CellState], action: Action) -> dict[Coord, C
     if isinstance(action, CascadeAction):
         return apply_cascade(board, action)
     raise ValueError("Unknown action type")
+
+
+def is_game_over(board: dict[Coord, CellState], turn_count: int, color: PlayerColor) -> bool:
+    # No win conditions during placement phase
+    if turn_count < PLACEMENT_TURNS:                                                                                                   
+        return False                                      
+                                                                                                                                        
+    # Elimination
+    red_tokens = sum(cell.height for cell in board.values() if cell.color == PlayerColor.RED)                                          
+    blue_tokens = sum(cell.height for cell in board.values() if cell.color == PlayerColor.BLUE)
+    if red_tokens == 0 or blue_tokens == 0:                                                                                            
+        return True
+                                                                                                                                        
+    # Turn limit                                          
+    if (turn_count - PLACEMENT_TURNS) >= MAX_TURNS:
+        return True                                                                                                                    
+
+    # Stalemate                                                                                                                        
+    if not legal_actions(board, color, turn_count):       
+        return True
+
+    return False 
