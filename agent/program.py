@@ -1,6 +1,7 @@
 # COMP30024 Artificial Intelligence, Semester 1 2026
 # Project Part B: Game Playing Agent
 
+from agent.moves import apply_action
 from referee.game import PlayerColor, Coord, Direction, \
     Action, PlaceAction, MoveAction, EatAction, CascadeAction
 
@@ -20,6 +21,7 @@ class Agent:
         """
         self._color = color
         self._turn_count = 0
+        self.board = {}
         match color:
             case PlayerColor.RED:
                 print("Testing: I am playing as RED (first player)")
@@ -56,15 +58,19 @@ class Agent:
         #         print("Testing: BLUE is playing a MOVE action")
         #         return MoveAction(Coord(7, 0), Direction.Up)
         depth = 3
-        return minimax({}, depth, self._color, self._turn_count)[1]
+        return minimax(self.board, depth, self._color, self._turn_count)[1]
 
     def update(self, color: PlayerColor, action: Action, **referee: dict):
         """
         This method is called by the referee after a player has taken their
         turn. You should use it to update the agent's internal game state.
         """
-        if color == self._color:
-            self._turn_count += 1
+        # if color == self._color:
+        #     self._turn_count += 1
+        self._turn_count += 1
+
+        # Update board:
+        self.board = apply_action(self.board, action, color)
 
         # There are four possible action types: PLACE, MOVE, EAT, and CASCADE.
         # Below we check which type of action was played and print out the

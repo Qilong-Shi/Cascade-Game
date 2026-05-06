@@ -11,6 +11,7 @@ from referee.game import (
     PlayerColor,
     PLACEMENT_TURNS,
     MAX_TURNS,
+    INITIAL_STACK_HEIGHT,
     PlaceAction
 )
 
@@ -23,13 +24,14 @@ def legal_actions(board: dict[Coord, CellState], color: PlayerColor, turn_count:
     # During placement phase, can only place on empty cells
     if turn_count < PLACEMENT_TURNS:
         # Generate list of all empty coordinates
+        # rules, cannot be taken already, cannot be adjacent to opposing player's stack
         legal_coords = []
         for r in range(BOARD_N):
             for c in range(BOARD_N):
                 coord = Coord(r, c)
-                if board.get(coord, CellState()).is_empty:
+                # Check if coordinate is empty and has no adjacent enemy stacks
+                if board.get(coord, CellState()).is_empty and no_adjacent_enemy(board, coord, color):
                     legal_coords.append(coord)
-
         # append place action for each legal coordinate
         for coord in legal_coords:
             actions.append(PlaceAction(coord))
@@ -60,6 +62,18 @@ def legal_actions(board: dict[Coord, CellState], color: PlayerColor, turn_count:
                     actions.append(EatAction(coord, direction))
 
     return actions
+
+def no_adjacent_enemy(board: dict[Coord, CellState], coord: Coord, color: PlayerColor) -> bool:
+    """
+    Check if there are no adjacent enemy stacks to the given coordinate.
+    """
+    for direction in CARDINAL_DIRECTIONS:
+        adjacent_coord = step(coord, direction)
+        if adjacent_coord is not None:
+            adjacent_cell = board.get(adjacent_coord, CellState())
+            if not adjacent_cell.is_empty and adjacent_cell.color != color:
+                return False
+    return True
 
 def step(coord: Coord, direction: Direction) -> Coord | None:
     """
@@ -176,34 +190,45 @@ def apply_cascade(board: dict[Coord, CellState], action: CascadeAction
 
     return new_board
 
+def apply_place(board: dict[Coord, CellState], action: PlaceAction, color: PlayerColor) -> dict[Coord, CellState]:
+    """
+    Return new board with place action applied.
+    """
+    new_board = board.copy()
+    if not new_board.get(action.coord, CellState()).is_empty:
+        raise ValueError(f"Cannot place on non-empty cell at {action.coord}")
+    new_board[action.coord] = CellState(color, INITIAL_STACK_HEIGHT)
+    return new_board
 
-def apply_action(board: dict[Coord, CellState], action: Action) -> dict[Coord, CellState]:
+
+def apply_action(board: dict[Coord, CellState], action: Action, color: PlayerColor) -> dict[Coord, CellState]:
     if isinstance(action, MoveAction):
         return apply_move(board, action)
     if isinstance(action, EatAction):
         return apply_eat(board, action)
     if isinstance(action, CascadeAction):
         return apply_cascade(board, action)
+    if isinstance(action, PlaceAction):
+        return apply_place(board, action, color)
     raise ValueError("Unknown action type")
 
 
-def is_game_over(board: dict[Coord, CellState], turn_count: int, color: PlayerColor) -> bool:
+def is_game_over(board: dict[Coord, CellState], turn_count: int) -> bool:
     # No win conditions during placement phase
-    if turn_count < PLACEMENT_TURNS:                                                                                                   
-        return False                                      
-                                                                                                                                        
+    if turn_count < PLACEMENT_TURNS:
+        return False
     # Elimination
     red_tokens = sum(cell.height for cell in board.values() if cell.color == PlayerColor.RED)                                          
     blue_tokens = sum(cell.height for cell in board.values() if cell.color == PlayerColor.BLUE)
-    if red_tokens == 0 or blue_tokens == 0:                                                                                            
+    if red_tokens == 0 or blue_tokens == 0:
         return True
-                                                                                                                                        
-    # Turn limit                                          
+    # Turn limit
     if (turn_count - PLACEMENT_TURNS) >= MAX_TURNS:
-        return True                                                                                                                    
-
-    # Stalemate                                                                                                                        
-    if not legal_actions(board, color, turn_count):       
         return True
 
-    return False 
+    # Stalemate
+    if not legal_actions(board, PlayerColor.RED, turn_count) or \
+        not legal_actions(board, PlayerColor.BLUE, turn_count):
+        return True
+
+    return False
