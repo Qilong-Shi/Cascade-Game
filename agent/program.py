@@ -5,7 +5,7 @@ from agent.moves import apply_action
 from referee.game import PlayerColor, Coord, Direction, \
     Action, PlaceAction, MoveAction, EatAction, CascadeAction
 
-from .minimax import minimax
+from .minimax import alpha_beta, minimax
 
 
 class Agent:
@@ -28,7 +28,7 @@ class Agent:
             case PlayerColor.BLUE:
                 print("Testing: I am playing as BLUE")
 
-    def action(self, **referee: dict) -> Action:
+    def action(self, **referee: dict) -> Action | None:
         """
         This method is called by the referee each time it is the agent's turn
         to take an action. It must always return an action object.
@@ -58,7 +58,8 @@ class Agent:
         #         print("Testing: BLUE is playing a MOVE action")
         #         return MoveAction(Coord(7, 0), Direction.Up)
         depth = 3
-        return minimax(self.board, depth, self._color, self._turn_count)[1]
+        # return minimax(self.board, depth, self._color, self._turn_count)[1]
+        return alpha_beta(self.board, depth, self._color, self._turn_count, float('-inf'), float('inf'))[1]
 
     def update(self, color: PlayerColor, action: Action, **referee: dict):
         """
