@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(uv --version)",
+      "Bash(uv venv *)",
+      "Bash(python3 *)"
+    ]
+  }
+}

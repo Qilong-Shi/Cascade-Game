@@ -37,11 +37,11 @@ def legal_actions(board: dict[Coord, CellState], color: PlayerColor, turn_count:
             actions.append(PlaceAction(coord))
     
     else:
-        for coord, cell in board.items():
+        for coord, cell in sorted(board.items()):
             if cell.color != color:
                 continue
 
-            for direction in CARDINAL_DIRECTIONS:
+            for direction in sorted(CARDINAL_DIRECTIONS, key=lambda d: (d.r, d.c)):
                 if cell.height > 1:
                     actions.append(CascadeAction(coord, direction))
 
@@ -221,14 +221,17 @@ def is_game_over(board: dict[Coord, CellState], turn_count: int) -> bool:
     red_tokens = sum(cell.height for cell in board.values() if cell.color == PlayerColor.RED)                                          
     blue_tokens = sum(cell.height for cell in board.values() if cell.color == PlayerColor.BLUE)
     if red_tokens == 0 or blue_tokens == 0:
+        print(f"Game over: {'RED' if red_tokens == 0 else 'BLUE'} has been eliminated.")
         return True
     # Turn limit
     if (turn_count - PLACEMENT_TURNS) >= MAX_TURNS:
+        print("Game over: Turn limit reached.")
         return True
 
     # Stalemate
     if not legal_actions(board, PlayerColor.RED, turn_count) or \
         not legal_actions(board, PlayerColor.BLUE, turn_count):
+        print("Game over: Stalemate.")
         return True
 
     return False

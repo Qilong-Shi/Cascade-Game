@@ -1,12 +1,14 @@
 # COMP30024 Artificial Intelligence, Semester 1 2026
 # Project Part B: Game Playing Agent
 
+import os
 from agent.moves import apply_action
 from referee.game import PlayerColor, Coord, Direction, \
     Action, PlaceAction, MoveAction, EatAction, CascadeAction
 
-from .minimax import alpha_beta, minimax
+from .minimax import alpha_beta
 
+DEFAULT_DEPTH = 4
 
 class Agent:
     """
@@ -22,11 +24,12 @@ class Agent:
         self._color = color
         self._turn_count = 0
         self.board = {}
+        self.depth = int(os.environ.get(f"{color.name}_DEPTH", DEFAULT_DEPTH))
         match color:
             case PlayerColor.RED:
-                print("Testing: I am playing as RED (first player)")
+                print(f"Testing: I am playing as RED (first player), depth={self.depth}")
             case PlayerColor.BLUE:
-                print("Testing: I am playing as BLUE")
+                print(f"Testing: I am playing as BLUE, depth={self.depth}")
 
     def action(self, **referee: dict) -> Action | None:
         """
@@ -57,9 +60,8 @@ class Agent:
         #     case PlayerColor.BLUE:
         #         print("Testing: BLUE is playing a MOVE action")
         #         return MoveAction(Coord(7, 0), Direction.Up)
-        depth = 3
-        # return minimax(self.board, depth, self._color, self._turn_count)[1]
-        return alpha_beta(self.board, depth, self._color, self._turn_count, float('-inf'), float('inf'))[1]
+        # return minimax(self.board, self.depth, self._color, self._turn_count)[1]
+        return alpha_beta(self.board, self.depth, self._color, self._turn_count, float('-inf'), float('inf'))[1]
 
     def update(self, color: PlayerColor, action: Action, **referee: dict):
         """
@@ -72,6 +74,10 @@ class Agent:
 
         # Update board:
         self.board = apply_action(self.board, action, color)
+
+        # Performance evaluaton
+        print(f"Color: {color}, Time Remaining: {referee['time_remaining']}s")
+        print(f"Color: {color}, Memory Remaining: {referee['space_remaining']}MB")
 
         # There are four possible action types: PLACE, MOVE, EAT, and CASCADE.
         # Below we check which type of action was played and print out the
