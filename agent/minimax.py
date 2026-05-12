@@ -57,21 +57,25 @@ def evaluate_board(board: dict[Coord, CellState]) -> float:
 def evaluate(state_counter: defaultdict[int], board: dict[Coord, CellState], turn_count: int) -> float:
 
     eval_score = 0
+
+    center_score = 0
     tie_score = 0
+    diff_score = 0
     CENTER_WEIGHT = 1
     TIE_WEIGHT = 1
 
-    if turn_count < 8: # during placement phase, break placement ties with centre weighting
+    if turn_count < 8 + 8:
         for coord, cell in board.items():
             if cell.is_empty:
                 continue
             color_mult = 1 if cell.color == PlayerColor.RED else -1
-            tie_score += color_mult * weighting_from_center(coord) * CENTER_WEIGHT
-        eval_score = tie_score
+            center_score += color_mult * weighting_from_center(coord) * CENTER_WEIGHT
 
-    else:
+
+    if turn_count >= 8: # only evaluate win conditions during play phase
         red_tokens = sum(cell.height for cell in board.values() if cell.color == PlayerColor.RED)
         blue_tokens = sum(cell.height for cell in board.values() if cell.color == PlayerColor.BLUE)
+        diff_score = red_tokens - blue_tokens
 
         hsh = simple_board_hash(board, turn_count)
         state_counter[hsh] += 1 # decrement state counter to check for win conditions without counting current state
@@ -84,7 +88,7 @@ def evaluate(state_counter: defaultdict[int], board: dict[Coord, CellState], tur
 
         state_counter[hsh] -= 1 # restore state counter
 
-        eval_score = red_tokens - blue_tokens + tie_score
+    eval_score = center_score + tie_score + diff_score
     return eval_score
 
 # helper function
@@ -95,5 +99,5 @@ def weighting_from_center(coord1: Coord) -> float:
     Returns higher values for coordinates closer to the centre, lower values for coordinates further from the centre.
     """
     center = (3.5, 3.5)
-    distance = ((coord1.r - center[0]) ** 2 + (coord1.c - center[1]) ** 2)
+    distance = (abs(coord1.r - center[0]) + abs(coord1.c - center[1]))
     return 1 / (1 + distance)
