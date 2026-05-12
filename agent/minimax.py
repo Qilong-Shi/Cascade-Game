@@ -64,7 +64,7 @@ def evaluate(state_counter: defaultdict[int], board: dict[Coord, CellState], tur
     win_score = 0
 
     turn_limit_score = 0
-    CENTER_WEIGHT = 10
+    CENTER_WEIGHT = 5
     TIE_WEIGHT = 5
 
     for coord, cell in board.items():
