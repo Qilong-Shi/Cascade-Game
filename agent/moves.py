@@ -238,23 +238,23 @@ def is_game_over(state_counter: defaultdict[int], board: dict[Coord, CellState],
     red_tokens = sum(cell.height for cell in board.values() if cell.color == PlayerColor.RED)                                          
     blue_tokens = sum(cell.height for cell in board.values() if cell.color == PlayerColor.BLUE)
     if red_tokens == 0 or blue_tokens == 0:
-        print(f"Game over: {'RED' if red_tokens == 0 else 'BLUE'} has been eliminated.")
+        #print(f"Game over: {'RED' if red_tokens == 0 else 'BLUE'} has been eliminated.")
         return True
     # Turn limit
     if (turn_count - PLACEMENT_TURNS) >= MAX_TURNS:
-        print("Game over: Turn limit reached.")
+        #print("Game over: Turn limit reached.")
         return True
 
     # Threefold repetition
     if state_counter[simple_board_hash(board, turn_count)] >= 3:
-        print("Game over: Threefold repetition.")
-        print(f"Final board state:\n{simple_board_hash(board, turn_count)}")
+        #print("Game over: Threefold repetition.")
+        #print(f"Final board state:\n{simple_board_hash(board, turn_count)}")
         return True
 
     # Stalemate
     if not legal_actions(board, PlayerColor.RED, turn_count) or \
         not legal_actions(board, PlayerColor.BLUE, turn_count):
-        print("Game over: Stalemate.")
+        #print("Game over: Stalemate.")
         return True
 
     return False
