@@ -2,7 +2,7 @@
 # Project Part B: Game Playing Agent
 
 import os
-from agent.moves import apply_action, simple_board_hash
+from .moves import apply_action, simple_board_hash
 from referee.game import PlayerColor, Coord, Direction, \
     Action, PlaceAction, MoveAction, EatAction, CascadeAction
 
