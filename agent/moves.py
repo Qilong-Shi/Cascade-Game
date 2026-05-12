@@ -15,6 +15,8 @@ from referee.game import (
     PlaceAction
 )
 
+from collections import defaultdict
+
 def legal_actions(board: dict[Coord, CellState], color: PlayerColor, turn_count: int) -> list[Action]:
     """
     Generate all legal actions for any coloured stacks.
@@ -213,7 +215,22 @@ def apply_action(board: dict[Coord, CellState], action: Action, color: PlayerCol
     raise ValueError("Unknown action type")
 
 
-def is_game_over(board: dict[Coord, CellState], turn_count: int) -> bool:
+def simple_board_hash(board: dict[Coord, CellState], turn_count: int) -> str:
+    """
+    Return a simple string hash of the board state
+    """
+    cells = [str(turn_count%2)] # include turn count to distinguish between turns
+    for r in range(BOARD_N):
+        for c in range(BOARD_N):
+            cell = board.get(Coord(r, c), CellState())
+            if cell.is_empty:
+                cells.append("E")
+            else:
+                color_char = "R" if cell.color == PlayerColor.RED else "B"
+                cells.append(f"{color_char}{cell.height}")
+    return "".join(cells)
+
+def is_game_over(state_counter: defaultdict[int], board: dict[Coord, CellState], turn_count: int) -> bool:
     # No win conditions during placement phase
     if turn_count < PLACEMENT_TURNS:
         return False
@@ -226,6 +243,12 @@ def is_game_over(board: dict[Coord, CellState], turn_count: int) -> bool:
     # Turn limit
     if (turn_count - PLACEMENT_TURNS) >= MAX_TURNS:
         print("Game over: Turn limit reached.")
+        return True
+
+    # Threefold repetition
+    if state_counter[simple_board_hash(board, turn_count)] >= 3:
+        print("Game over: Threefold repetition.")
+        print(f"Final board state:\n{simple_board_hash(board, turn_count)}")
         return True
 
     # Stalemate

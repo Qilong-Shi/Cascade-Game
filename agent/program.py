@@ -2,10 +2,11 @@
 # Project Part B: Game Playing Agent
 
 import os
-from agent.moves import apply_action
+from agent.moves import apply_action, simple_board_hash
 from referee.game import PlayerColor, Coord, Direction, \
     Action, PlaceAction, MoveAction, EatAction, CascadeAction
 
+from collections import defaultdict
 from .minimax import alpha_beta
 
 DEFAULT_DEPTH = 4
@@ -24,6 +25,9 @@ class Agent:
         self._color = color
         self._turn_count = 0
         self.board = {}
+        self.state_counter = defaultdict(int)
+
+        # for setting custom depths for testing
         self.depth = int(os.environ.get(f"{color.name}_DEPTH", DEFAULT_DEPTH))
         match color:
             case PlayerColor.RED:
@@ -61,15 +65,17 @@ class Agent:
         #         print("Testing: BLUE is playing a MOVE action")
         #         return MoveAction(Coord(7, 0), Direction.Up)
         # return minimax(self.board, self.depth, self._color, self._turn_count)[1]
-        return alpha_beta(self.board, self.depth, self._color, self._turn_count, float('-inf'), float('inf'))[1]
+        return alpha_beta(self.state_counter, self.board, self.depth, self._color, self._turn_count, float('-inf'), float('inf'))[1]
 
     def update(self, color: PlayerColor, action: Action, **referee: dict):
         """
         This method is called by the referee after a player has taken their
         turn. You should use it to update the agent's internal game state.
         """
-        # if color == self._color:
-        #     self._turn_count += 1
+        # Store current board state
+        self.state_counter[simple_board_hash(self.board, self._turn_count)] += 1
+
+        # Increment turn count
         self._turn_count += 1
 
         # Update board:
