@@ -53,15 +53,15 @@ def legal_actions(board: dict[Coord, CellState], color: PlayerColor, turn_count:
 
                 target_cell = board.get(target, CellState())
 
-                if target_cell.is_empty or target_cell.color == cell.color:
-                    actions.append(MoveAction(coord, direction))
-
                 if (
                     not target_cell.is_empty
                     and target_cell.color != cell.color
                     and cell.height >= target_cell.height
                 ):
                     actions.append(EatAction(coord, direction))
+
+                if target_cell.is_empty or target_cell.color == cell.color:
+                    actions.append(MoveAction(coord, direction))
 
     return actions
 

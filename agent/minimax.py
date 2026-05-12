@@ -11,7 +11,7 @@ def alpha_beta(state_counter: defaultdict[int], board: dict[Coord, CellState], d
 
     if depth == 0 or is_game_over(state_counter, board, turn_count):
         state_counter[hsh] -= 1 # decrement state counter before returning
-        return evaluate_board(board), None
+        return evaluate(state_counter, board, turn_count), None
 
     best_action = None # allows for single return call
     best_eval = None
@@ -52,3 +52,48 @@ def evaluate_board(board: dict[Coord, CellState]) -> float:
     red_tokens = sum(cell.height for cell in board.values() if cell.color == PlayerColor.RED)                                          
     blue_tokens = sum(cell.height for cell in board.values() if cell.color == PlayerColor.BLUE)
     return red_tokens - blue_tokens
+
+# returns positive if good for red, negative if good for blue
+def evaluate(state_counter: defaultdict[int], board: dict[Coord, CellState], turn_count: int) -> float:
+
+    eval_score = 0
+    tie_score = 0
+    CENTER_WEIGHT = 1
+    TIE_WEIGHT = 1
+
+    if turn_count < 8: # during placement phase, break placement ties with centre weighting
+        for coord, cell in board.items():
+            if cell.is_empty:
+                continue
+            color_mult = 1 if cell.color == PlayerColor.RED else -1
+            tie_score += color_mult * weighting_from_center(coord) * CENTER_WEIGHT
+        eval_score = tie_score
+
+    else:
+        red_tokens = sum(cell.height for cell in board.values() if cell.color == PlayerColor.RED)
+        blue_tokens = sum(cell.height for cell in board.values() if cell.color == PlayerColor.BLUE)
+
+        hsh = simple_board_hash(board, turn_count)
+        state_counter[hsh] += 1 # decrement state counter to check for win conditions without counting current state
+        if is_game_over(state_counter, board, turn_count) and (red_tokens and blue_tokens): # if game finishes but not from win
+            tie_score = -TIE_WEIGHT # bad for red, since red wants to win as it has a starting advantage
+            if red_tokens > blue_tokens: # even worse for red since it is winning, it does not want to draw
+                tie_score -= TIE_WEIGHT
+            else:
+                tie_score *= -1 # good for red since it is losing, it wants to draw, makes tie_score positive
+
+        state_counter[hsh] -= 1 # restore state counter
+
+        eval_score = red_tokens - blue_tokens + tie_score
+    return eval_score
+
+# helper function
+
+def weighting_from_center(coord1: Coord) -> float:
+    """
+    Return a weighting based on distance from the centre of the board, used to break ties during placement phase.
+    Returns higher values for coordinates closer to the centre, lower values for coordinates further from the centre.
+    """
+    center = (3.5, 3.5)
+    distance = ((coord1.r - center[0]) ** 2 + (coord1.c - center[1]) ** 2)
+    return 1 / (1 + distance)
