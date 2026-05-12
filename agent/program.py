@@ -9,7 +9,7 @@ from referee.game import PlayerColor, Coord, Direction, \
 from collections import defaultdict
 from .minimax import alpha_beta
 
-DEFAULT_DEPTH = 4
+DEFAULT_DEPTH = 3
 
 class Agent:
     """
