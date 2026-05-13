@@ -16,6 +16,10 @@ from referee.game import (
 
 from collections import defaultdict
 
+# Efficiency improvement precomputations
+_SORTED_DIRS = tuple(sorted(CARDINAL_DIRECTIONS, key=lambda d: (d.value.r, d.value.c)))
+DIR_LOOKUP = {d: (d.value.r, d.value.c) for d in CARDINAL_DIRECTIONS}
+
 def legal_actions(board: dict[tuple, CellState], color: PlayerColor, turn_count: int) -> list[Action]:
     """
     Generate all legal actions for any coloured stacks.
@@ -38,11 +42,11 @@ def legal_actions(board: dict[tuple, CellState], color: PlayerColor, turn_count:
             actions.append(PlaceAction(coord))
     
     else:
-        for coord, cell in sorted(board.items()):
+        for coord, cell in sorted(board.items()): # REMOVE THE SORTING for higher efficiency but loses determinism
             if cell.color != color:
                 continue
 
-            for direction in sorted(CARDINAL_DIRECTIONS, key=lambda d: (d.r, d.c)):
+            for direction in _SORTED_DIRS:
                 if cell.height > 1:
                     actions.append(CascadeAction(coord, direction))
 
@@ -68,7 +72,7 @@ def no_adjacent_enemy(board: dict[tuple, CellState], coord: tuple, color: Player
     """
     Check if there are no adjacent enemy stacks to the given coordinate.
     """
-    for direction in CARDINAL_DIRECTIONS:
+    for direction in _SORTED_DIRS:
         adjacent_coord = step(coord, direction)
         if adjacent_coord is not None:
             adjacent_cell = board.get(adjacent_coord)
@@ -80,8 +84,10 @@ def step(coord: tuple, direction: Direction) -> tuple | None:
     """
     Return next coordinate in bounds, otherwise None.
     """
-    new_r = coord[0] + direction.r
-    new_c = coord[1] + direction.c
+    dir_offset = DIR_LOOKUP[direction]
+
+    new_r = coord[0] + dir_offset[0]
+    new_c = coord[1] + dir_offset[1]
     if 0 <= new_r < BOARD_N and 0 <= new_c < BOARD_N:
         return (new_r, new_c)
     return None
