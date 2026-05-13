@@ -8,6 +8,7 @@ from referee.game import PlayerColor, Coord, Direction, \
 
 from collections import defaultdict
 from .minimax import alpha_beta
+from .utils import rewrap_action, unwrap_action
 
 DEFAULT_DEPTH = 3
 
@@ -72,14 +73,17 @@ class Agent:
         #     self.depth = 3
         # else:
         #     self.depth = 5
-
-        return alpha_beta(self.state_counter, self.board, self.depth, self._color, self._turn_count, float('-inf'), float('inf'))[1]
+        best_action = alpha_beta(self.state_counter, self.board, self.depth, self._color, self._turn_count, float('-inf'), float('inf'))[1]
+        
+        return rewrap_action(best_action)
 
     def update(self, color: PlayerColor, action: Action, **referee: dict):
         """
         This method is called by the referee after a player has taken their
         turn. You should use it to update the agent's internal game state.
         """
+        action = unwrap_action(action)
+
         # Store current board state
         self.state_counter[simple_board_hash(self.board, self._turn_count)] += 1
 

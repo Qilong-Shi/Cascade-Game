@@ -93,7 +93,7 @@ def apply_move(board: dict[tuple, CellState], action: MoveAction) -> dict[tuple,
     """
     new_board = board.copy()
 
-    source_coord = (action.coord.r, action.coord.c)
+    source_coord = action.coord
     source_state = board[source_coord]
     target_coord = step(source_coord, action.direction)
     if target_coord is None:
@@ -120,7 +120,7 @@ def apply_eat(board: dict[tuple, CellState], action: EatAction) -> dict[tuple, C
     """
     new_board = board.copy()
 
-    source_coord = (action.coord.r, action.coord.c)
+    source_coord = action.coord
     source_state = board[source_coord]
     target_coord = step(source_coord, action.direction)
     if target_coord is None:
@@ -139,7 +139,7 @@ def apply_cascade(board: dict[tuple, CellState], action: CascadeAction
     """
     new_board = board.copy()
 
-    source_coord = (action.coord.r, action.coord.c)
+    source_coord = action.coord
     source_state = board[source_coord]
     direction = action.direction
     height = source_state.height
@@ -195,10 +195,10 @@ def apply_place(board: dict[tuple, CellState], action: PlaceAction, color: Playe
     """
     Return new board with place action applied.
     """
-    source_coord = (action.coord.r, action.coord.c)
+    source_coord = action.coord
     new_board = board.copy()
     if not new_board.get(source_coord, CellState()).is_empty:
-        raise ValueError(f"Cannot place on non-empty cell at {action.coord}")
+        raise ValueError(f"Cannot place on non-empty cell at {source_coord}")
     new_board[source_coord] = CellState(color, INITIAL_STACK_HEIGHT)
     return new_board
 

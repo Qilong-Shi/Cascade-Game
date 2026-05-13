@@ -113,11 +113,11 @@ def evaluate(state_counter: defaultdict[int], board: dict[Coord, CellState], tur
 
 # helper function
 
-def weighting_from_center(coord1: Coord) -> float:
+def weighting_from_center(coord: Coord) -> float:
     """
     Return a weighting based on distance from the centre of the board, used to break ties during placement phase.
     Returns higher values for coordinates closer to the centre, lower values for coordinates further from the centre.
     """
     center = (3.5, 3.5)
-    distance = (abs(coord1.r - center[0]) + abs(coord1.c - center[1]))
+    distance = (abs(coord[0] - center[0]) + abs(coord[1] - center[1]))
     return 1 / (1 + distance)
