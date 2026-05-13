@@ -20,7 +20,7 @@ from agent.moves import is_game_over, legal_actions
 from referee.game import CellState, Coord, PlayerColor
 
 
-DEPTH = 3
+DEPTH = 4
 WALL_CLOCK_REPEATS = 3
 REPORT_ROWS = 15
 

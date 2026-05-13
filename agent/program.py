@@ -65,6 +65,14 @@ class Agent:
         #         print("Testing: BLUE is playing a MOVE action")
         #         return MoveAction(Coord(7, 0), Direction.Up)
         # return minimax(self.board, self.depth, self._color, self._turn_count)[1]
+
+
+        # test dynamic depth adjustment
+        # if self._turn_count < 50:
+        #     self.depth = 3
+        # else:
+        #     self.depth = 5
+
         return alpha_beta(self.state_counter, self.board, self.depth, self._color, self._turn_count, float('-inf'), float('inf'))[1]
 
     def update(self, color: PlayerColor, action: Action, **referee: dict):

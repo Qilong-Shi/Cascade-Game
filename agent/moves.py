@@ -4,7 +4,6 @@ from referee.game import (
     CARDINAL_DIRECTIONS,
     CascadeAction,
     CellState,
-    Coord,
     Direction,
     EatAction,
     MoveAction,
@@ -17,7 +16,7 @@ from referee.game import (
 
 from collections import defaultdict
 
-def legal_actions(board: dict[Coord, CellState], color: PlayerColor, turn_count: int) -> list[Action]:
+def legal_actions(board: dict[tuple, CellState], color: PlayerColor, turn_count: int) -> list[Action]:
     """
     Generate all legal actions for any coloured stacks.
     """
@@ -30,7 +29,7 @@ def legal_actions(board: dict[Coord, CellState], color: PlayerColor, turn_count:
         legal_coords = []
         for r in range(BOARD_N):
             for c in range(BOARD_N):
-                coord = Coord(r, c)
+                coord = (r, c)
                 # Check if coordinate is empty and has no adjacent enemy stacks
                 if board.get(coord, CellState()).is_empty and no_adjacent_enemy(board, coord, color):
                     legal_coords.append(coord)
@@ -65,7 +64,7 @@ def legal_actions(board: dict[Coord, CellState], color: PlayerColor, turn_count:
 
     return actions
 
-def no_adjacent_enemy(board: dict[Coord, CellState], coord: Coord, color: PlayerColor) -> bool:
+def no_adjacent_enemy(board: dict[tuple, CellState], coord: tuple, color: PlayerColor) -> bool:
     """
     Check if there are no adjacent enemy stacks to the given coordinate.
     """
@@ -77,24 +76,24 @@ def no_adjacent_enemy(board: dict[Coord, CellState], coord: Coord, color: Player
                 return False
     return True
 
-def step(coord: Coord, direction: Direction) -> Coord | None:
+def step(coord: tuple, direction: Direction) -> tuple | None:
     """
     Return next coordinate in bounds, otherwise None.
     """
-    new_r = coord.r + direction.r
-    new_c = coord.c + direction.c
+    new_r = coord[0] + direction.r
+    new_c = coord[1] + direction.c
     if 0 <= new_r < BOARD_N and 0 <= new_c < BOARD_N:
-        return Coord(new_r, new_c)
+        return (new_r, new_c)
     return None
 
 
-def apply_move(board: dict[Coord, CellState], action: MoveAction) -> dict[Coord, CellState]:
+def apply_move(board: dict[tuple, CellState], action: MoveAction) -> dict[tuple, CellState]:
     """
     return new board of the move action applied on the cell
     """
     new_board = board.copy()
 
-    source_coord = action.coord
+    source_coord = (action.coord.r, action.coord.c)
     source_state = board[source_coord]
     target_coord = step(source_coord, action.direction)
     if target_coord is None:
@@ -115,13 +114,13 @@ def apply_move(board: dict[Coord, CellState], action: MoveAction) -> dict[Coord,
     return new_board
 
 
-def apply_eat(board: dict[Coord, CellState], action: EatAction) -> dict[Coord, CellState]:
+def apply_eat(board: dict[tuple, CellState], action: EatAction) -> dict[tuple, CellState]:
     """
     return new board of the eat action applied on the cell
     """
     new_board = board.copy()
 
-    source_coord = action.coord
+    source_coord = (action.coord.r, action.coord.c)
     source_state = board[source_coord]
     target_coord = step(source_coord, action.direction)
     if target_coord is None:
@@ -133,21 +132,21 @@ def apply_eat(board: dict[Coord, CellState], action: EatAction) -> dict[Coord, C
     return new_board
 
 
-def apply_cascade(board: dict[Coord, CellState], action: CascadeAction
-) -> dict[Coord, CellState]:
+def apply_cascade(board: dict[tuple, CellState], action: CascadeAction
+) -> dict[tuple, CellState]:
     """
     Return new board with cascade action applied.
     """
     new_board = board.copy()
 
-    source_coord = action.coord
+    source_coord = (action.coord.r, action.coord.c)
     source_state = board[source_coord]
     direction = action.direction
     height = source_state.height
 
     del new_board[source_coord]
 
-    def push_stack(coord: Coord) -> None:
+    def push_stack(coord: tuple) -> None:
         """
         Push a stack one step in the cascade direction.
         Stacks pushed out of bounds are eliminated.
@@ -167,7 +166,7 @@ def apply_cascade(board: dict[Coord, CellState], action: CascadeAction
         new_board[next_coord] = current_state
         del new_board[coord]
 
-    def drop_token(target_coord: Coord | None, color: PlayerColor) -> None:
+    def drop_token(target_coord: tuple | None, color: PlayerColor) -> None:
         """
         Drop one token of given color at target.
         If occupied, push the stack first.
@@ -192,18 +191,19 @@ def apply_cascade(board: dict[Coord, CellState], action: CascadeAction
 
     return new_board
 
-def apply_place(board: dict[Coord, CellState], action: PlaceAction, color: PlayerColor) -> dict[Coord, CellState]:
+def apply_place(board: dict[tuple, CellState], action: PlaceAction, color: PlayerColor) -> dict[tuple, CellState]:
     """
     Return new board with place action applied.
     """
+    source_coord = (action.coord.r, action.coord.c)
     new_board = board.copy()
-    if not new_board.get(action.coord, CellState()).is_empty:
+    if not new_board.get(source_coord, CellState()).is_empty:
         raise ValueError(f"Cannot place on non-empty cell at {action.coord}")
-    new_board[action.coord] = CellState(color, INITIAL_STACK_HEIGHT)
+    new_board[source_coord] = CellState(color, INITIAL_STACK_HEIGHT)
     return new_board
 
 
-def apply_action(board: dict[Coord, CellState], action: Action, color: PlayerColor) -> dict[Coord, CellState]:
+def apply_action(board: dict[tuple, CellState], action: Action, color: PlayerColor) -> dict[tuple, CellState]:
     if isinstance(action, MoveAction):
         return apply_move(board, action)
     if isinstance(action, EatAction):
@@ -215,7 +215,7 @@ def apply_action(board: dict[Coord, CellState], action: Action, color: PlayerCol
     raise ValueError("Unknown action type")
 
 
-def simple_board_hash(board: dict[Coord, CellState], turn_count: int) -> str:
+def simple_board_hash(board: dict[tuple, CellState], turn_count: int) -> str:
     """
     Return a simple string hash of the board state.
 
@@ -225,10 +225,10 @@ def simple_board_hash(board: dict[Coord, CellState], turn_count: int) -> str:
     parts = [str(turn_count & 1)]
     for coord, cell in sorted(board.items()):
         color_char = "R" if cell.color == PlayerColor.RED else "B"
-        parts.append(f"{coord.r}{coord.c}{color_char}{cell.height}")
+        parts.append(f"{coord[0]}{coord[1]}{color_char}{cell.height}")
     return "".join(parts)
 
-def is_game_over(state_counter: defaultdict[int], board: dict[Coord, CellState], turn_count: int, hsh: str | None = None) -> bool:
+def is_game_over(state_counter: defaultdict[int], board: dict[tuple, CellState], turn_count: int, hsh: str | None = None) -> bool:
     # No win conditions during placement phase
     if turn_count < PLACEMENT_TURNS:
         return False
