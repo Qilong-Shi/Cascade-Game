@@ -217,25 +217,23 @@ def apply_action(board: dict[Coord, CellState], action: Action, color: PlayerCol
 
 def simple_board_hash(board: dict[Coord, CellState], turn_count: int) -> str:
     """
-    Return a simple string hash of the board state
-    """
-    cells = [str(turn_count%2)] # include turn count to distinguish between turns
-    for r in range(BOARD_N):
-        for c in range(BOARD_N):
-            cell = board.get(Coord(r, c), CellState())
-            if cell.is_empty:
-                cells.append("E")
-            else:
-                color_char = "R" if cell.color == PlayerColor.RED else "B"
-                cells.append(f"{color_char}{cell.height}")
-    return "".join(cells)
+    Return a simple string hash of the board state.
 
-def is_game_over(state_counter: defaultdict[int], board: dict[Coord, CellState], turn_count: int) -> bool:
+    Iterates only occupied cells (sorted for canonical ordering — dict iteration
+    is insertion-ordered and apply_action can reorder for the same position).
+    """
+    parts = [str(turn_count & 1)]
+    for coord, cell in sorted(board.items()):
+        color_char = "R" if cell.color == PlayerColor.RED else "B"
+        parts.append(f"{coord.r}{coord.c}{color_char}{cell.height}")
+    return "".join(parts)
+
+def is_game_over(state_counter: defaultdict[int], board: dict[Coord, CellState], turn_count: int, hsh: str | None = None) -> bool:
     # No win conditions during placement phase
     if turn_count < PLACEMENT_TURNS:
         return False
     # Elimination
-    red_tokens = sum(cell.height for cell in board.values() if cell.color == PlayerColor.RED)                                          
+    red_tokens = sum(cell.height for cell in board.values() if cell.color == PlayerColor.RED)
     blue_tokens = sum(cell.height for cell in board.values() if cell.color == PlayerColor.BLUE)
     if red_tokens == 0 or blue_tokens == 0:
         #print(f"Game over: {'RED' if red_tokens == 0 else 'BLUE'} has been eliminated.")
@@ -245,8 +243,8 @@ def is_game_over(state_counter: defaultdict[int], board: dict[Coord, CellState],
         #print("Game over: Turn limit reached.")
         return True
 
-    # Threefold repetition
-    if state_counter[simple_board_hash(board, turn_count)] >= 3:
+    # Threefold repetition, if hash is None, then still in placement phase (whcih should be caught already)
+    if hsh is not None and state_counter[hsh] >= 3:
         #print("Game over: Threefold repetition.")
         #print(f"Final board state:\n{simple_board_hash(board, turn_count)}")
         return True

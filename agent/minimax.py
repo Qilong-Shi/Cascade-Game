@@ -1,5 +1,5 @@
 from .moves import apply_action, legal_actions, is_game_over, simple_board_hash
-from referee.game import PlayerColor, Action, Coord, CellState
+from referee.game import PlayerColor, Action, Coord, CellState, PLACEMENT_TURNS
 from collections import defaultdict
 import numpy as np
 
@@ -7,12 +7,18 @@ def alpha_beta(state_counter: defaultdict[int], board: dict[Coord, CellState], d
     """
     Return the best action for the current player using the alpha-beta pruning algorithm.
     """
-    hsh = simple_board_hash(board, turn_count)
-    state_counter[hsh] += 1
+    # Hashing + state_counter only matter for threefold-repetition detection, which
+    # is_game_over short-circuits past during placement. Skip the work entirely there.
+    hsh = None
+    if turn_count >= PLACEMENT_TURNS:
+        hsh = simple_board_hash(board, turn_count)
+        state_counter[hsh] += 1
 
-    if depth == 0 or is_game_over(state_counter, board, turn_count):
-        state_counter[hsh] -= 1 # decrement state counter before returning
-        return evaluate(state_counter, board, turn_count), None
+
+    if depth == 0 or is_game_over(state_counter, board, turn_count, hsh):
+        if hsh is not None:
+            state_counter[hsh] -= 1
+        return evaluate(state_counter, board, turn_count, hsh), None
 
     best_action = None # allows for single return call
     best_eval = None
@@ -43,7 +49,8 @@ def alpha_beta(state_counter: defaultdict[int], board: dict[Coord, CellState], d
                 break
         best_eval = min_eval
     
-    state_counter[hsh] -= 1 # decrement state counter before returning
+    if hsh is not None:
+        state_counter[hsh] -= 1
     return best_eval, best_action
 
 
@@ -54,7 +61,7 @@ def evaluate_board(board: dict[Coord, CellState]) -> float:
     return red_tokens - blue_tokens
 
 # returns positive if good for red, negative if good for blue
-def evaluate(state_counter: defaultdict[int], board: dict[Coord, CellState], turn_count: int) -> float:
+def evaluate(state_counter: defaultdict[int], board: dict[Coord, CellState], turn_count: int, hsh: str | None = None) -> float:
 
     eval_score = 0
 
@@ -84,16 +91,16 @@ def evaluate(state_counter: defaultdict[int], board: dict[Coord, CellState], tur
         if red_tokens == 0: # losing is worst, even worse if it loses faster
             win_score = -1000 + turn_count # arbitrary large negative value to represent a loss
 
-        hsh = simple_board_hash(board, turn_count)
-        state_counter[hsh] += 1 # decrement state counter to check for win conditions without counting current state
-        if is_game_over(state_counter, board, turn_count) and (red_tokens and blue_tokens): # if game finishes from draw
-            tie_score = -TIE_WEIGHT # bad for red, since red wants to win as it has a starting advantage
-            if red_tokens > blue_tokens: # even worse for red since it is winning, it does not want to draw
-                tie_score -= TIE_WEIGHT
-            else:
-                tie_score *= -1 # good for red since it is losing, it wants to draw, makes tie_score positive
+        if hsh is not None: # None hsh means still in placement phase
+            state_counter[hsh] += 1 # decrement state counter to check for win conditions without counting current state
+            if is_game_over(state_counter, board, turn_count, hsh) and (red_tokens and blue_tokens): # if game finishes from draw
+                tie_score = -TIE_WEIGHT # bad for red, since red wants to win as it has a starting advantage
+                if red_tokens > blue_tokens: # even worse for red since it is winning, it does not want to draw
+                    tie_score -= TIE_WEIGHT
+                else:
+                    tie_score *= -1 # good for red since it is losing, it wants to draw, makes tie_score positive
 
-        state_counter[hsh] -= 1 # restore state counter
+            state_counter[hsh] -= 1 # restore state counter
 
         # reward turn limit wins since they are the same
 
