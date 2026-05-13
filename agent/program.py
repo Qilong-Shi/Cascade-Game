@@ -10,7 +10,7 @@ from collections import defaultdict
 from .minimax import alpha_beta
 from .utils import rewrap_action, unwrap_action
 
-DEFAULT_DEPTH = 3
+DEFAULT_DEPTH = 4
 
 class Agent:
     """

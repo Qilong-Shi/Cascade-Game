@@ -31,24 +31,24 @@ def empty_board() -> tuple[str, str, dict[Coord, CellState], int, PlayerColor]:
 
 def mid_placement_board() -> tuple[str, str, dict[Coord, CellState], int, PlayerColor]:
     board = {
-        Coord(0, 0): CellState(PlayerColor.RED, 3),
-        Coord(7, 7): CellState(PlayerColor.RED, 3),
-        Coord(0, 7): CellState(PlayerColor.BLUE, 3),
-        Coord(7, 0): CellState(PlayerColor.BLUE, 3),
+        (0, 0): CellState(PlayerColor.RED, 3),
+        (7, 7): CellState(PlayerColor.RED, 3),
+        (0, 7): CellState(PlayerColor.BLUE, 3),
+        (7, 0): CellState(PlayerColor.BLUE, 3),
     }
     return "mid-place", "mid-placement (turn 4)", board, 4, PlayerColor.RED
 
 
 def post_placement_board() -> tuple[str, str, dict[Coord, CellState], int, PlayerColor]:
     board = {
-        Coord(0, 0): CellState(PlayerColor.RED, 3),
-        Coord(2, 2): CellState(PlayerColor.RED, 3),
-        Coord(5, 5): CellState(PlayerColor.RED, 3),
-        Coord(7, 7): CellState(PlayerColor.RED, 3),
-        Coord(0, 7): CellState(PlayerColor.BLUE, 3),
-        Coord(2, 5): CellState(PlayerColor.BLUE, 3),
-        Coord(5, 2): CellState(PlayerColor.BLUE, 3),
-        Coord(7, 0): CellState(PlayerColor.BLUE, 3),
+        (0, 0): CellState(PlayerColor.RED, 3),
+        (2, 2): CellState(PlayerColor.RED, 3),
+        (5, 5): CellState(PlayerColor.RED, 3),
+        (7, 7): CellState(PlayerColor.RED, 3),
+        (0, 7): CellState(PlayerColor.BLUE, 3),
+        (2, 5): CellState(PlayerColor.BLUE, 3),
+        (5, 2): CellState(PlayerColor.BLUE, 3),
+        (7, 0): CellState(PlayerColor.BLUE, 3),
     }
     return "post-place", "post-placement (turn 8)", board, 8, PlayerColor.RED
 
@@ -57,14 +57,14 @@ def mid_play_board() -> tuple[str, str, dict[Coord, CellState], int, PlayerColor
     # Mixed stack heights, both colors, adjacent pieces so eat/cascade options
     # all exercise their branches.
     board = {
-        Coord(1, 1): CellState(PlayerColor.RED, 2),
-        Coord(2, 3): CellState(PlayerColor.RED, 3),
-        Coord(4, 4): CellState(PlayerColor.RED, 1),
-        Coord(5, 2): CellState(PlayerColor.RED, 2),
-        Coord(3, 3): CellState(PlayerColor.BLUE, 1),
-        Coord(3, 4): CellState(PlayerColor.BLUE, 2),
-        Coord(6, 5): CellState(PlayerColor.BLUE, 3),
-        Coord(5, 5): CellState(PlayerColor.BLUE, 1),
+        (1, 1): CellState(PlayerColor.RED, 2),
+        (2, 3): CellState(PlayerColor.RED, 3),
+        (4, 4): CellState(PlayerColor.RED, 1),
+        (5, 2): CellState(PlayerColor.RED, 2),
+        (3, 3): CellState(PlayerColor.BLUE, 1),
+        (3, 4): CellState(PlayerColor.BLUE, 2),
+        (6, 5): CellState(PlayerColor.BLUE, 3),
+        (5, 5): CellState(PlayerColor.BLUE, 1),
     }
     return "mid-play", "mid-play (turn 30)", board, 30, PlayerColor.RED
 

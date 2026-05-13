@@ -31,7 +31,7 @@ def legal_actions(board: dict[tuple, CellState], color: PlayerColor, turn_count:
             for c in range(BOARD_N):
                 coord = (r, c)
                 # Check if coordinate is empty and has no adjacent enemy stacks
-                if board.get(coord, CellState()).is_empty and no_adjacent_enemy(board, coord, color):
+                if coord not in board and no_adjacent_enemy(board, coord, color):
                     legal_coords.append(coord)
         # append place action for each legal coordinate
         for coord in legal_coords:
@@ -50,16 +50,16 @@ def legal_actions(board: dict[tuple, CellState], color: PlayerColor, turn_count:
                 if target is None:
                     continue
 
-                target_cell = board.get(target, CellState())
+                target_cell = board.get(target)
 
                 if (
-                    not target_cell.is_empty
+                    target in board
                     and target_cell.color != cell.color
                     and cell.height >= target_cell.height
                 ):
                     actions.append(EatAction(coord, direction))
 
-                if target_cell.is_empty or target_cell.color == cell.color:
+                if target not in board or target_cell.color == cell.color:
                     actions.append(MoveAction(coord, direction))
 
     return actions
@@ -71,8 +71,8 @@ def no_adjacent_enemy(board: dict[tuple, CellState], coord: tuple, color: Player
     for direction in CARDINAL_DIRECTIONS:
         adjacent_coord = step(coord, direction)
         if adjacent_coord is not None:
-            adjacent_cell = board.get(adjacent_coord, CellState())
-            if not adjacent_cell.is_empty and adjacent_cell.color != color:
+            adjacent_cell = board.get(adjacent_coord)
+            if adjacent_cell is not None and adjacent_cell.color != color:
                 return False
     return True
 
