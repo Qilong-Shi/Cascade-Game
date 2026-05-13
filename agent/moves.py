@@ -151,8 +151,8 @@ def apply_cascade(board: dict[tuple, CellState], action: CascadeAction
         Push a stack one step in the cascade direction.
         Stacks pushed out of bounds are eliminated.
         """
-        current_state = new_board.get(coord, CellState())
-        if current_state.is_empty:
+        current_state = new_board.get(coord)
+        if current_state is None:
             return
 
         next_coord = step(coord, direction)
@@ -160,7 +160,7 @@ def apply_cascade(board: dict[tuple, CellState], action: CascadeAction
             del new_board[coord]
             return
 
-        if new_board.get(next_coord, CellState()).is_stack:
+        if next_coord in new_board:
             push_stack(next_coord)
 
         new_board[next_coord] = current_state
@@ -174,8 +174,7 @@ def apply_cascade(board: dict[tuple, CellState], action: CascadeAction
         if target_coord is None:
             return
 
-        target_state = new_board.get(target_coord, CellState())
-        if target_state.is_empty:
+        if target_coord not in new_board:
             new_board[target_coord] = CellState(color, 1)
         else:
             push_stack(target_coord)
@@ -197,7 +196,7 @@ def apply_place(board: dict[tuple, CellState], action: PlaceAction, color: Playe
     """
     source_coord = action.coord
     new_board = board.copy()
-    if not new_board.get(source_coord, CellState()).is_empty:
+    if source_coord in board:
         raise ValueError(f"Cannot place on non-empty cell at {source_coord}")
     new_board[source_coord] = CellState(color, INITIAL_STACK_HEIGHT)
     return new_board

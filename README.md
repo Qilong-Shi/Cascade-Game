@@ -5,5 +5,8 @@ Create some sort of timing script to time each move function and see which one i
 
 Maybe also dynamically increase depth depending on how many pieces left since less pieces less branches
 
-Does legal moves consider add stacks?
+Does legal moves consider add stacks? Yes
+
+Test against az one
+
 

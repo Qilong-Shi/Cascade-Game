@@ -75,8 +75,6 @@ def evaluate(state_counter: defaultdict[int], board: dict[Coord, CellState], tur
     TIE_WEIGHT = 5
 
     for coord, cell in board.items():
-        if cell.is_empty:
-            continue
         color_mult = 1 if cell.color == PlayerColor.RED else -1
         center_score += color_mult * weighting_from_center(coord) * CENTER_WEIGHT
     center_score *= 1/300 * (turn_count - 8) + 1 # dropoff function
