@@ -1,0 +1,96 @@
+Testing: I am playing as RED (first player), depth=4
+Color: RED, Time Remaining: 175.375s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played PLACE action at (2, 3)
+Color: BLUE, Time Remaining: 175.375s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played PLACE action at (1, 7)
+Color: RED, Time Remaining: 171.421875s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played PLACE action at (4, 4)
+Color: BLUE, Time Remaining: 171.40625s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played PLACE action at (2, 6)
+Color: RED, Time Remaining: 164.453125s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played PLACE action at (4, 3)
+Color: BLUE, Time Remaining: 164.453125s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played PLACE action at (3, 0)
+Color: RED, Time Remaining: 162.15625s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played PLACE action at (1, 4)
+Color: BLUE, Time Remaining: 162.15625s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played PLACE action at (7, 5)
+Color: RED, Time Remaining: 160.875s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played CASCADE action:
+  Coord: (1, 4)
+  Direction: [¡ú]
+Color: BLUE, Time Remaining: 160.875s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played CASCADE action:
+  Coord: (3, 0)
+  Direction: [¡ú]
+Color: RED, Time Remaining: 159.484375s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played EAT action:
+  Coord: (2, 3)
+  Direction: [¡ý]
+Color: BLUE, Time Remaining: 159.484375s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played CASCADE action:
+  Coord: (7, 5)
+  Direction: [¡û]
+Color: RED, Time Remaining: 158.765625s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played CASCADE action:
+  Coord: (3, 3)
+  Direction: [¡û]
+Color: BLUE, Time Remaining: 158.765625s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (2, 6)
+  Direction: [¡ý]
+Color: RED, Time Remaining: 157.921875s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played CASCADE action:
+  Coord: (4, 3)
+  Direction: [¡ý]
+Color: BLUE, Time Remaining: 157.921875s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (3, 6)
+  Direction: [¡ý]
+Color: RED, Time Remaining: 157.40625s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played CASCADE action:
+  Coord: (4, 4)
+  Direction: [¡ú]
+Color: BLUE, Time Remaining: 157.40625s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played EAT action:
+  Coord: (7, 4)
+  Direction: [¡û]
+Color: RED, Time Remaining: 156.671875s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (6, 3)
+  Direction: [¡ü]
+Color: BLUE, Time Remaining: 156.671875s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (7, 2)
+  Direction: [¡ü]
+Color: RED, Time Remaining: 156.171875s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played CASCADE action:
+  Coord: (5, 3)
+  Direction: [¡ý]
+Color: BLUE, Time Remaining: 156.171875s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (6, 2)
+  Direction: [¡ý]
+* referee @ result: player 1 [agent:Agent]

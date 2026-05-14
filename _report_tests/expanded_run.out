@@ -1,0 +1,57 @@
+[1/24] Versus random baseline | current RED | seed=300240
+    result=player 1 [agent:Agent]; current_won=True; elapsed=34.1s
+[2/24] Versus random baseline | current RED | seed=300241
+    result=player 1 [agent:Agent]; current_won=True; elapsed=26.0s
+[3/24] Versus random baseline | current RED | seed=300242
+    result=player 1 [agent:Agent]; current_won=True; elapsed=46.2s
+[4/24] Versus random baseline | current RED | seed=300243
+    result=player 1 [agent:Agent]; current_won=True; elapsed=40.2s
+[5/24] Versus random baseline | current RED | seed=300244
+    result=player 1 [agent:Agent]; current_won=True; elapsed=32.9s
+[6/24] Versus random baseline | current RED | seed=300245
+    result=player 1 [agent:Agent]; current_won=True; elapsed=31.4s
+[7/24] Versus random baseline | current BLUE | seed=300246
+    result=player 2 [agent:Agent]; current_won=True; elapsed=33.8s
+[8/24] Versus random baseline | current BLUE | seed=300247
+    result=player 2 [agent:Agent]; current_won=True; elapsed=35.8s
+[9/24] Versus random baseline | current BLUE | seed=300248
+    result=player 2 [agent:Agent]; current_won=True; elapsed=51.0s
+[10/24] Versus random baseline | current BLUE | seed=300249
+    result=player 2 [agent:Agent]; current_won=True; elapsed=39.5s
+[11/24] Versus random baseline | current BLUE | seed=300250
+    result=player 2 [agent:Agent]; current_won=True; elapsed=35.6s
+[12/24] Versus random baseline | current BLUE | seed=300251
+    result=player 2 [agent:Agent]; current_won=True; elapsed=51.6s
+[13/24] Versus greedy baseline | current RED | seed=None
+    result=player 1 [agent:Agent]; current_won=True; elapsed=47.5s
+[14/24] Versus greedy baseline | current RED | seed=None
+    result=player 1 [agent:Agent]; current_won=True; elapsed=86.3s
+[15/24] Versus greedy baseline | current RED | seed=None
+    result=player 1 [agent:Agent]; current_won=True; elapsed=47.3s
+[16/24] Versus greedy baseline | current BLUE | seed=None
+    result=player 2 [agent:Agent]; current_won=True; elapsed=45.2s
+[17/24] Versus greedy baseline | current BLUE | seed=None
+    result=player 2 [agent:Agent]; current_won=True; elapsed=45.7s
+[18/24] Versus greedy baseline | current BLUE | seed=None
+    result=player 2 [agent:Agent]; current_won=True; elapsed=45.1s
+[19/24] Self-play against earlier version | current RED | seed=None
+    result=player 1 [agent:Agent]; current_won=True; elapsed=78.7s
+[20/24] Self-play against earlier version | current RED | seed=None
+    result=player 1 [agent:Agent]; current_won=True; elapsed=78.7s
+[21/24] Self-play against earlier version | current RED | seed=None
+    result=player 1 [agent:Agent]; current_won=True; elapsed=78.8s
+[22/24] Self-play against earlier version | current BLUE | seed=None
+    result=player 2 [agent:Agent]; current_won=True; elapsed=32.8s
+[23/24] Self-play against earlier version | current BLUE | seed=None
+    result=player 2 [agent:Agent]; current_won=True; elapsed=33.2s
+[24/24] Self-play against earlier version | current BLUE | seed=None
+    result=player 2 [agent:Agent]; current_won=True; elapsed=33.3s
+
+| Test Setting | Games Played | Agent as Red | Agent as Blue | Win Rate | Notes |
+|---|---:|---:|---:|---:|---|
+| Versus random baseline | 12 | 6/6 | 6/6 | 100% | Tests robustness against seeded random legal play; average game runtime 38.2s |
+| Versus greedy baseline | 6 | 3/3 | 3/3 | 100% | Tests tactical strength against one-step evaluation; average game runtime 52.9s |
+| Self-play against earlier version | 6 | 3/3 | 3/3 | 100% | Compares against the depth-3 earlier variant; average game runtime 55.9s |
+
+Total local opponent games: 24
+Overall local win rate: 24/24 (100%)

@@ -1,4 +1,5 @@
 import random
+import os
 
 from agent.moves import apply_action, legal_actions
 from agent.utils import rewrap_action, unwrap_action
@@ -10,7 +11,8 @@ class Agent:
         self._color = color
         self._turn_count = 0
         self._board = {}
-        self._rng = random.Random(30024 + (0 if color == PlayerColor.RED else 1))
+        base_seed = int(os.environ.get("REPORT_RANDOM_SEED", "30024"))
+        self._rng = random.Random(base_seed + (0 if color == PlayerColor.RED else 1))
 
     def action(self, **referee: dict) -> Action:
         action = self._rng.choice(legal_actions(self._board, self._color, self._turn_count))
