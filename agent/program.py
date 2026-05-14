@@ -68,13 +68,16 @@ class Agent:
         # return minimax(self.board, self.depth, self._color, self._turn_count)[1]
 
 
-        # test dynamic depth adjustment
+        #test dynamic depth adjustment
         # if self._turn_count < 50:
-        #     self.depth = 3
-        # else:
+        #     self.depth = 4
+        # elif self._turn_count < 100:
         #     self.depth = 5
+        # elif self._turn_count < 200:
+        #     self.depth = 6
+        # else:
+        #     self.depth = 7
         best_action = alpha_beta(self.state_counter, self.board, self.depth, self._color, self._turn_count, float('-inf'), float('inf'))[1]
-        
         return rewrap_action(best_action)
 
     def update(self, color: PlayerColor, action: Action, **referee: dict):

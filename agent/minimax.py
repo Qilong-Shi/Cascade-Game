@@ -53,7 +53,6 @@ def alpha_beta(state_counter: defaultdict[int], board: dict[Coord, CellState], d
         state_counter[hsh] -= 1
     return best_eval, best_action
 
-
 # very simple evaluation function, just return difference in number of tokens
 def evaluate_board(board: dict[Coord, CellState]) -> float:
     red_tokens = sum(cell.height for cell in board.values() if cell.color == PlayerColor.RED)                                          
@@ -71,7 +70,7 @@ def evaluate(state_counter: defaultdict[int], board: dict[Coord, CellState], tur
     win_score = 0
 
     turn_limit_score = 0
-    CENTER_WEIGHT = 5
+    CENTER_WEIGHT = 3
     TIE_WEIGHT = 5
 
     for coord, cell in board.items():
