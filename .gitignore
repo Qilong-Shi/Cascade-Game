@@ -2,8 +2,20 @@
 .venv/
 .claude/
 
+# files
+_report_tests/
+tic-tac-toe-final.py
+robot-search.py
+part_b.pdf
+referee/
+output.ans
+profile.out
+
+
+
 # Python cache files
 __pycache__/
 **/__pycache__/
 *.py[cod]
 *$py.class
+
