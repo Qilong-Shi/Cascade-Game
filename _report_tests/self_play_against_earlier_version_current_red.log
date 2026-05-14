@@ -1,0 +1,3041 @@
+Testing: I am playing as RED (first player), depth=4
+Testing: I am playing as BLUE, depth=4
+Color: RED, Time Remaining: 175.28125s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played PLACE action at (2, 3)
+Color: RED, Time Remaining: 179.984375s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played PLACE action at (2, 3)
+Color: BLUE, Time Remaining: 175.28125s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played PLACE action at (3, 4)
+Color: BLUE, Time Remaining: 179.671875s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played PLACE action at (3, 4)
+Color: RED, Time Remaining: 170.28125s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played PLACE action at (4, 3)
+Color: RED, Time Remaining: 179.671875s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played PLACE action at (4, 3)
+Color: BLUE, Time Remaining: 170.28125s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played PLACE action at (3, 2)
+Color: BLUE, Time Remaining: 179.53125s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played PLACE action at (3, 2)
+Color: RED, Time Remaining: 157.109375s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played PLACE action at (2, 5)
+Color: RED, Time Remaining: 179.53125s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played PLACE action at (2, 5)
+Color: BLUE, Time Remaining: 157.109375s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played PLACE action at (1, 4)
+Color: BLUE, Time Remaining: 178.3125s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played PLACE action at (1, 4)
+Color: RED, Time Remaining: 151.46875s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played PLACE action at (5, 4)
+Color: RED, Time Remaining: 178.3125s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played PLACE action at (5, 4)
+Color: BLUE, Time Remaining: 151.46875s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played PLACE action at (4, 6)
+Color: BLUE, Time Remaining: 177.828125s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played PLACE action at (4, 6)
+Color: RED, Time Remaining: 137.0s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played CASCADE action:
+  Coord: (5, 4)
+  Direction: [¡û]
+Color: RED, Time Remaining: 177.828125s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played CASCADE action:
+  Coord: (5, 4)
+  Direction: [¡û]
+Color: BLUE, Time Remaining: 137.0s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played CASCADE action:
+  Coord: (3, 2)
+  Direction: [¡ú]
+Color: BLUE, Time Remaining: 176.40625s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played CASCADE action:
+  Coord: (3, 2)
+  Direction: [¡ú]
+Color: RED, Time Remaining: 123.8125s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played EAT action:
+  Coord: (4, 3)
+  Direction: [¡ü]
+Color: RED, Time Remaining: 176.40625s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played EAT action:
+  Coord: (4, 3)
+  Direction: [¡ü]
+Color: BLUE, Time Remaining: 123.8125s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played CASCADE action:
+  Coord: (3, 6)
+  Direction: [¡û]
+Color: BLUE, Time Remaining: 175.140625s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played CASCADE action:
+  Coord: (3, 6)
+  Direction: [¡û]
+Color: RED, Time Remaining: 120.21875s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played EAT action:
+  Coord: (3, 0)
+  Direction: [¡ú]
+Color: RED, Time Remaining: 175.140625s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played EAT action:
+  Coord: (3, 0)
+  Direction: [¡ú]
+Color: BLUE, Time Remaining: 120.21875s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played CASCADE action:
+  Coord: (4, 6)
+  Direction: [¡û]
+Color: BLUE, Time Remaining: 174.65625s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played CASCADE action:
+  Coord: (4, 6)
+  Direction: [¡û]
+Color: RED, Time Remaining: 114.40625s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played CASCADE action:
+  Coord: (3, 1)
+  Direction: [¡ú]
+Color: RED, Time Remaining: 174.65625s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played CASCADE action:
+  Coord: (3, 1)
+  Direction: [¡ú]
+Color: BLUE, Time Remaining: 114.40625s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played EAT action:
+  Coord: (3, 5)
+  Direction: [¡û]
+Color: BLUE, Time Remaining: 173.703125s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played EAT action:
+  Coord: (3, 5)
+  Direction: [¡û]
+Color: RED, Time Remaining: 107.796875s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 3)
+  Direction: [¡ý]
+Color: RED, Time Remaining: 173.703125s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 3)
+  Direction: [¡ý]
+Color: BLUE, Time Remaining: 107.796875s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (1, 4)
+  Direction: [¡ý]
+Color: BLUE, Time Remaining: 172.640625s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (1, 4)
+  Direction: [¡ý]
+Color: RED, Time Remaining: 104.765625s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played EAT action:
+  Coord: (2, 5)
+  Direction: [¡û]
+Color: RED, Time Remaining: 172.640625s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played EAT action:
+  Coord: (2, 5)
+  Direction: [¡û]
+Color: BLUE, Time Remaining: 104.765625s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (3, 6)
+  Direction: [¡ý]
+Color: BLUE, Time Remaining: 172.015625s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (3, 6)
+  Direction: [¡ý]
+Color: RED, Time Remaining: 101.890625s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played EAT action:
+  Coord: (3, 3)
+  Direction: [¡ý]
+Color: RED, Time Remaining: 172.015625s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played EAT action:
+  Coord: (3, 3)
+  Direction: [¡ý]
+Color: BLUE, Time Remaining: 101.890625s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (4, 4)
+  Direction: [¡ý]
+Color: BLUE, Time Remaining: 171.640625s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (4, 4)
+  Direction: [¡ý]
+Color: RED, Time Remaining: 98.875s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played CASCADE action:
+  Coord: (4, 3)
+  Direction: [¡ú]
+Color: RED, Time Remaining: 171.640625s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played CASCADE action:
+  Coord: (4, 3)
+  Direction: [¡ú]
+Color: BLUE, Time Remaining: 98.875s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played EAT action:
+  Coord: (3, 4)
+  Direction: [¡ý]
+Color: BLUE, Time Remaining: 171.484375s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played EAT action:
+  Coord: (3, 4)
+  Direction: [¡ý]
+Color: RED, Time Remaining: 97.5625s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played EAT action:
+  Coord: (4, 5)
+  Direction: [¡û]
+Color: RED, Time Remaining: 171.484375s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played EAT action:
+  Coord: (4, 5)
+  Direction: [¡û]
+Color: BLUE, Time Remaining: 97.5625s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played EAT action:
+  Coord: (3, 7)
+  Direction: [¡ý]
+Color: BLUE, Time Remaining: 171.390625s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played EAT action:
+  Coord: (3, 7)
+  Direction: [¡ý]
+Color: RED, Time Remaining: 96.578125s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played EAT action:
+  Coord: (4, 4)
+  Direction: [¡ý]
+Color: RED, Time Remaining: 171.390625s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played EAT action:
+  Coord: (4, 4)
+  Direction: [¡ý]
+Color: BLUE, Time Remaining: 96.578125s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played EAT action:
+  Coord: (4, 7)
+  Direction: [¡û]
+Color: BLUE, Time Remaining: 171.375s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played EAT action:
+  Coord: (4, 7)
+  Direction: [¡û]
+Color: RED, Time Remaining: 96.3125s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played CASCADE action:
+  Coord: (2, 4)
+  Direction: [¡ý]
+Color: RED, Time Remaining: 171.375s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played CASCADE action:
+  Coord: (2, 4)
+  Direction: [¡ý]
+Color: BLUE, Time Remaining: 96.3125s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (4, 6)
+  Direction: [¡ü]
+Color: BLUE, Time Remaining: 171.359375s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (4, 6)
+  Direction: [¡ü]
+Color: RED, Time Remaining: 95.984375s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (5, 2)
+  Direction: [¡ú]
+Color: RED, Time Remaining: 171.359375s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (5, 2)
+  Direction: [¡ú]
+Color: BLUE, Time Remaining: 95.984375s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (3, 6)
+  Direction: [¡ý]
+Color: BLUE, Time Remaining: 171.328125s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (3, 6)
+  Direction: [¡ý]
+Color: RED, Time Remaining: 95.71875s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (5, 1)
+  Direction: [¡ü]
+Color: RED, Time Remaining: 171.328125s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (5, 1)
+  Direction: [¡ü]
+Color: BLUE, Time Remaining: 95.71875s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (4, 6)
+  Direction: [¡ü]
+Color: BLUE, Time Remaining: 171.296875s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (4, 6)
+  Direction: [¡ü]
+Color: RED, Time Remaining: 95.359375s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (4, 1)
+  Direction: [¡ú]
+Color: RED, Time Remaining: 171.296875s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (4, 1)
+  Direction: [¡ú]
+Color: BLUE, Time Remaining: 95.359375s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (3, 6)
+  Direction: [¡ý]
+Color: BLUE, Time Remaining: 171.28125s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (3, 6)
+  Direction: [¡ý]
+Color: RED, Time Remaining: 95.0625s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (3, 2)
+  Direction: [¡ú]
+Color: RED, Time Remaining: 171.28125s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (3, 2)
+  Direction: [¡ú]
+Color: BLUE, Time Remaining: 95.0625s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (4, 6)
+  Direction: [¡ü]
+Color: BLUE, Time Remaining: 171.25s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (4, 6)
+  Direction: [¡ü]
+Color: RED, Time Remaining: 94.65625s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (3, 3)
+  Direction: [¡ü]
+Color: RED, Time Remaining: 171.25s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (3, 3)
+  Direction: [¡ü]
+Color: BLUE, Time Remaining: 94.65625s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (3, 6)
+  Direction: [¡ý]
+Color: BLUE, Time Remaining: 171.21875s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (3, 6)
+  Direction: [¡ý]
+Color: RED, Time Remaining: 94.359375s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 3)
+  Direction: [¡ú]
+Color: RED, Time Remaining: 171.21875s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 3)
+  Direction: [¡ú]
+Color: BLUE, Time Remaining: 94.359375s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (4, 6)
+  Direction: [¡ü]
+Color: BLUE, Time Remaining: 171.203125s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (4, 6)
+  Direction: [¡ü]
+Color: RED, Time Remaining: 93.953125s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 4)
+  Direction: [¡û]
+Color: RED, Time Remaining: 171.203125s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 4)
+  Direction: [¡û]
+Color: BLUE, Time Remaining: 93.953125s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (3, 6)
+  Direction: [¡ý]
+Color: BLUE, Time Remaining: 171.171875s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (3, 6)
+  Direction: [¡ý]
+Color: RED, Time Remaining: 93.65625s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 3)
+  Direction: [¡ú]
+Color: RED, Time Remaining: 171.171875s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 3)
+  Direction: [¡ú]
+Color: BLUE, Time Remaining: 93.65625s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (4, 6)
+  Direction: [¡ü]
+Color: BLUE, Time Remaining: 171.140625s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (4, 6)
+  Direction: [¡ü]
+Color: RED, Time Remaining: 93.25s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (4, 2)
+  Direction: [¡ü]
+Color: RED, Time Remaining: 171.140625s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (4, 2)
+  Direction: [¡ü]
+Color: BLUE, Time Remaining: 93.25s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (3, 6)
+  Direction: [¡ý]
+Color: BLUE, Time Remaining: 171.109375s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (3, 6)
+  Direction: [¡ý]
+Color: RED, Time Remaining: 92.90625s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 4)
+  Direction: [¡û]
+Color: RED, Time Remaining: 171.109375s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 4)
+  Direction: [¡û]
+Color: BLUE, Time Remaining: 92.90625s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (4, 6)
+  Direction: [¡ü]
+Color: BLUE, Time Remaining: 171.078125s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (4, 6)
+  Direction: [¡ü]
+Color: RED, Time Remaining: 92.515625s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 3)
+  Direction: [¡ú]
+Color: RED, Time Remaining: 171.078125s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 3)
+  Direction: [¡ú]
+Color: BLUE, Time Remaining: 92.515625s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (3, 6)
+  Direction: [¡ý]
+Color: BLUE, Time Remaining: 171.046875s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (3, 6)
+  Direction: [¡ý]
+Color: RED, Time Remaining: 92.203125s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 4)
+  Direction: [¡û]
+Color: RED, Time Remaining: 171.046875s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 4)
+  Direction: [¡û]
+Color: BLUE, Time Remaining: 92.203125s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (4, 6)
+  Direction: [¡ü]
+Color: BLUE, Time Remaining: 171.015625s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (4, 6)
+  Direction: [¡ü]
+Color: RED, Time Remaining: 91.84375s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 3)
+  Direction: [¡ý]
+Color: RED, Time Remaining: 171.015625s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 3)
+  Direction: [¡ý]
+Color: BLUE, Time Remaining: 91.84375s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (3, 6)
+  Direction: [¡ý]
+Color: BLUE, Time Remaining: 170.984375s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (3, 6)
+  Direction: [¡ý]
+Color: RED, Time Remaining: 91.546875s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (3, 2)
+  Direction: [¡ý]
+Color: RED, Time Remaining: 170.984375s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (3, 2)
+  Direction: [¡ý]
+Color: BLUE, Time Remaining: 91.546875s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (4, 6)
+  Direction: [¡ü]
+Color: BLUE, Time Remaining: 170.96875s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (4, 6)
+  Direction: [¡ü]
+Color: RED, Time Remaining: 91.171875s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (3, 3)
+  Direction: [¡û]
+Color: RED, Time Remaining: 170.96875s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (3, 3)
+  Direction: [¡û]
+Color: BLUE, Time Remaining: 91.171875s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (3, 6)
+  Direction: [¡ý]
+Color: BLUE, Time Remaining: 170.953125s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (3, 6)
+  Direction: [¡ý]
+Color: RED, Time Remaining: 90.90625s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (4, 2)
+  Direction: [¡ú]
+Color: RED, Time Remaining: 170.953125s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (4, 2)
+  Direction: [¡ú]
+Color: BLUE, Time Remaining: 90.90625s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (4, 6)
+  Direction: [¡ü]
+Color: BLUE, Time Remaining: 170.9375s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (4, 6)
+  Direction: [¡ü]
+Color: RED, Time Remaining: 90.53125s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (3, 2)
+  Direction: [¡ý]
+Color: RED, Time Remaining: 170.9375s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (3, 2)
+  Direction: [¡ý]
+Color: BLUE, Time Remaining: 90.53125s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (3, 6)
+  Direction: [¡ý]
+Color: BLUE, Time Remaining: 170.921875s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (3, 6)
+  Direction: [¡ý]
+Color: RED, Time Remaining: 90.203125s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (4, 2)
+  Direction: [¡ü]
+Color: RED, Time Remaining: 170.921875s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (4, 2)
+  Direction: [¡ü]
+Color: BLUE, Time Remaining: 90.203125s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (4, 6)
+  Direction: [¡ü]
+Color: BLUE, Time Remaining: 170.890625s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (4, 6)
+  Direction: [¡ü]
+Color: RED, Time Remaining: 89.8125s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (3, 2)
+  Direction: [¡ý]
+Color: RED, Time Remaining: 170.890625s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (3, 2)
+  Direction: [¡ý]
+Color: BLUE, Time Remaining: 89.8125s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (3, 6)
+  Direction: [¡ý]
+Color: BLUE, Time Remaining: 170.875s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (3, 6)
+  Direction: [¡ý]
+Color: RED, Time Remaining: 89.53125s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (4, 3)
+  Direction: [¡ý]
+Color: RED, Time Remaining: 170.875s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (4, 3)
+  Direction: [¡ý]
+Color: BLUE, Time Remaining: 89.53125s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (4, 6)
+  Direction: [¡ü]
+Color: BLUE, Time Remaining: 170.84375s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (4, 6)
+  Direction: [¡ü]
+Color: RED, Time Remaining: 89.25s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (4, 2)
+  Direction: [¡ü]
+Color: RED, Time Remaining: 170.84375s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (4, 2)
+  Direction: [¡ü]
+Color: BLUE, Time Remaining: 89.25s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (3, 6)
+  Direction: [¡ý]
+Color: BLUE, Time Remaining: 170.8125s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (3, 6)
+  Direction: [¡ý]
+Color: RED, Time Remaining: 89.046875s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (3, 2)
+  Direction: [¡ý]
+Color: RED, Time Remaining: 170.8125s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (3, 2)
+  Direction: [¡ý]
+Color: BLUE, Time Remaining: 89.046875s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (4, 6)
+  Direction: [¡ü]
+Color: BLUE, Time Remaining: 170.796875s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (4, 6)
+  Direction: [¡ü]
+Color: RED, Time Remaining: 88.78125s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (4, 2)
+  Direction: [¡ü]
+Color: RED, Time Remaining: 170.796875s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (4, 2)
+  Direction: [¡ü]
+Color: BLUE, Time Remaining: 88.78125s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (3, 6)
+  Direction: [¡ý]
+Color: BLUE, Time Remaining: 170.765625s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (3, 6)
+  Direction: [¡ý]
+Color: RED, Time Remaining: 88.59375s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played CASCADE action:
+  Coord: (5, 3)
+  Direction: [¡ü]
+Color: RED, Time Remaining: 170.765625s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played CASCADE action:
+  Coord: (5, 3)
+  Direction: [¡ü]
+Color: BLUE, Time Remaining: 88.59375s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (4, 6)
+  Direction: [¡ü]
+Color: BLUE, Time Remaining: 170.75s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (4, 6)
+  Direction: [¡ü]
+Color: RED, Time Remaining: 88.109375s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (4, 4)
+  Direction: [¡ú]
+Color: RED, Time Remaining: 170.75s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (4, 4)
+  Direction: [¡ú]
+Color: BLUE, Time Remaining: 88.109375s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (3, 6)
+  Direction: [¡ü]
+Color: BLUE, Time Remaining: 170.703125s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (3, 6)
+  Direction: [¡ü]
+Color: RED, Time Remaining: 87.78125s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (4, 5)
+  Direction: [¡ü]
+Color: RED, Time Remaining: 170.703125s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (4, 5)
+  Direction: [¡ü]
+Color: BLUE, Time Remaining: 87.78125s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (2, 6)
+  Direction: [¡ü]
+Color: BLUE, Time Remaining: 170.671875s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (2, 6)
+  Direction: [¡ü]
+Color: RED, Time Remaining: 87.4375s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (5, 4)
+  Direction: [¡ü]
+Color: RED, Time Remaining: 170.671875s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (5, 4)
+  Direction: [¡ü]
+Color: BLUE, Time Remaining: 87.4375s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (1, 6)
+  Direction: [¡û]
+Color: BLUE, Time Remaining: 170.640625s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (1, 6)
+  Direction: [¡û]
+Color: RED, Time Remaining: 87.15625s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 3)
+  Direction: [¡ú]
+Color: RED, Time Remaining: 170.640625s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 3)
+  Direction: [¡ú]
+Color: BLUE, Time Remaining: 87.15625s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (1, 5)
+  Direction: [¡ü]
+Color: BLUE, Time Remaining: 170.625s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (1, 5)
+  Direction: [¡ü]
+Color: RED, Time Remaining: 86.828125s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 4)
+  Direction: [¡ü]
+Color: RED, Time Remaining: 170.625s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 4)
+  Direction: [¡ü]
+Color: BLUE, Time Remaining: 86.828125s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 5)
+  Direction: [¡ú]
+Color: BLUE, Time Remaining: 170.578125s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 5)
+  Direction: [¡ú]
+Color: RED, Time Remaining: 86.546875s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (1, 4)
+  Direction: [¡ý]
+Color: RED, Time Remaining: 170.578125s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (1, 4)
+  Direction: [¡ý]
+Color: BLUE, Time Remaining: 86.546875s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 6)
+  Direction: [¡û]
+Color: BLUE, Time Remaining: 170.546875s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 6)
+  Direction: [¡û]
+Color: RED, Time Remaining: 86.21875s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 4)
+  Direction: [¡ü]
+Color: RED, Time Remaining: 170.546875s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 4)
+  Direction: [¡ü]
+Color: BLUE, Time Remaining: 86.21875s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 5)
+  Direction: [¡ú]
+Color: BLUE, Time Remaining: 170.53125s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 5)
+  Direction: [¡ú]
+Color: RED, Time Remaining: 85.9375s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (6, 4)
+  Direction: [¡ü]
+Color: RED, Time Remaining: 170.53125s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (6, 4)
+  Direction: [¡ü]
+Color: BLUE, Time Remaining: 85.9375s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 6)
+  Direction: [¡û]
+Color: BLUE, Time Remaining: 170.515625s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 6)
+  Direction: [¡û]
+Color: RED, Time Remaining: 85.546875s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (3, 2)
+  Direction: [¡ý]
+Color: RED, Time Remaining: 170.515625s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (3, 2)
+  Direction: [¡ý]
+Color: BLUE, Time Remaining: 85.546875s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 5)
+  Direction: [¡ú]
+Color: BLUE, Time Remaining: 170.484375s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 5)
+  Direction: [¡ú]
+Color: RED, Time Remaining: 85.265625s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (1, 4)
+  Direction: [¡û]
+Color: RED, Time Remaining: 170.484375s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (1, 4)
+  Direction: [¡û]
+Color: BLUE, Time Remaining: 85.265625s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 6)
+  Direction: [¡û]
+Color: BLUE, Time Remaining: 170.46875s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 6)
+  Direction: [¡û]
+Color: RED, Time Remaining: 85.03125s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (1, 3)
+  Direction: [¡ú]
+Color: RED, Time Remaining: 170.46875s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (1, 3)
+  Direction: [¡ú]
+Color: BLUE, Time Remaining: 85.03125s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 5)
+  Direction: [¡ú]
+Color: BLUE, Time Remaining: 170.453125s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 5)
+  Direction: [¡ú]
+Color: RED, Time Remaining: 84.734375s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (1, 4)
+  Direction: [¡û]
+Color: RED, Time Remaining: 170.453125s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (1, 4)
+  Direction: [¡û]
+Color: BLUE, Time Remaining: 84.734375s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 6)
+  Direction: [¡û]
+Color: BLUE, Time Remaining: 170.4375s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 6)
+  Direction: [¡û]
+Color: RED, Time Remaining: 84.46875s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (1, 3)
+  Direction: [¡ý]
+Color: RED, Time Remaining: 170.4375s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (1, 3)
+  Direction: [¡ý]
+Color: BLUE, Time Remaining: 84.46875s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 5)
+  Direction: [¡û]
+Color: BLUE, Time Remaining: 170.421875s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 5)
+  Direction: [¡û]
+Color: RED, Time Remaining: 84.140625s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 3)
+  Direction: [¡ú]
+Color: RED, Time Remaining: 170.421875s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 3)
+  Direction: [¡ú]
+Color: BLUE, Time Remaining: 84.125s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 4)
+  Direction: [¡û]
+Color: BLUE, Time Remaining: 170.40625s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 4)
+  Direction: [¡û]
+Color: RED, Time Remaining: 83.890625s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 4)
+  Direction: [¡ü]
+Color: RED, Time Remaining: 170.40625s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 4)
+  Direction: [¡ü]
+Color: BLUE, Time Remaining: 83.890625s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 3)
+  Direction: [¡û]
+Color: BLUE, Time Remaining: 170.40625s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 3)
+  Direction: [¡û]
+Color: RED, Time Remaining: 83.640625s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (1, 4)
+  Direction: [¡û]
+Color: RED, Time Remaining: 170.40625s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (1, 4)
+  Direction: [¡û]
+Color: BLUE, Time Remaining: 83.640625s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 2)
+  Direction: [¡û]
+Color: BLUE, Time Remaining: 170.40625s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 2)
+  Direction: [¡û]
+Color: RED, Time Remaining: 83.328125s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (1, 3)
+  Direction: [¡ú]
+Color: RED, Time Remaining: 170.40625s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (1, 3)
+  Direction: [¡ú]
+Color: BLUE, Time Remaining: 83.328125s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 1)
+  Direction: [¡ú]
+Color: BLUE, Time Remaining: 170.390625s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 1)
+  Direction: [¡ú]
+Color: RED, Time Remaining: 83.078125s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (1, 4)
+  Direction: [¡û]
+Color: RED, Time Remaining: 170.390625s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (1, 4)
+  Direction: [¡û]
+Color: BLUE, Time Remaining: 83.078125s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 2)
+  Direction: [¡û]
+Color: BLUE, Time Remaining: 170.375s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 2)
+  Direction: [¡û]
+Color: RED, Time Remaining: 82.78125s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (1, 3)
+  Direction: [¡ý]
+Color: RED, Time Remaining: 170.375s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (1, 3)
+  Direction: [¡ý]
+Color: BLUE, Time Remaining: 82.78125s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 1)
+  Direction: [¡ú]
+Color: BLUE, Time Remaining: 170.359375s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 1)
+  Direction: [¡ú]
+Color: RED, Time Remaining: 82.34375s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 3)
+  Direction: [¡û]
+Color: RED, Time Remaining: 170.359375s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 3)
+  Direction: [¡û]
+Color: BLUE, Time Remaining: 82.34375s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 2)
+  Direction: [¡ú]
+Color: BLUE, Time Remaining: 170.34375s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 2)
+  Direction: [¡ú]
+Color: RED, Time Remaining: 82.015625s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 2)
+  Direction: [¡ú]
+Color: RED, Time Remaining: 170.34375s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 2)
+  Direction: [¡ú]
+Color: BLUE, Time Remaining: 82.015625s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 3)
+  Direction: [¡ú]
+Color: BLUE, Time Remaining: 170.328125s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 3)
+  Direction: [¡ú]
+Color: RED, Time Remaining: 81.71875s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 3)
+  Direction: [¡ú]
+Color: RED, Time Remaining: 170.328125s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 3)
+  Direction: [¡ú]
+Color: BLUE, Time Remaining: 81.71875s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 4)
+  Direction: [¡û]
+Color: BLUE, Time Remaining: 170.3125s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 4)
+  Direction: [¡û]
+Color: RED, Time Remaining: 81.21875s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (3, 4)
+  Direction: [¡ú]
+Color: RED, Time Remaining: 170.3125s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (3, 4)
+  Direction: [¡ú]
+Color: BLUE, Time Remaining: 81.21875s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 3)
+  Direction: [¡ý]
+Color: BLUE, Time Remaining: 170.28125s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 3)
+  Direction: [¡ý]
+Color: RED, Time Remaining: 80.921875s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (3, 3)
+  Direction: [¡ü]
+Color: RED, Time Remaining: 170.28125s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (3, 3)
+  Direction: [¡ü]
+Color: BLUE, Time Remaining: 80.921875s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (1, 3)
+  Direction: [¡ü]
+Color: BLUE, Time Remaining: 170.265625s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (1, 3)
+  Direction: [¡ü]
+Color: RED, Time Remaining: 80.625s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 4)
+  Direction: [¡ý]
+Color: RED, Time Remaining: 170.265625s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 4)
+  Direction: [¡ý]
+Color: BLUE, Time Remaining: 80.625s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 3)
+  Direction: [¡ú]
+Color: BLUE, Time Remaining: 170.234375s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 3)
+  Direction: [¡ú]
+Color: RED, Time Remaining: 80.34375s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 3)
+  Direction: [¡ú]
+Color: RED, Time Remaining: 170.234375s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 3)
+  Direction: [¡ú]
+Color: BLUE, Time Remaining: 80.34375s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 4)
+  Direction: [¡û]
+Color: BLUE, Time Remaining: 170.21875s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 4)
+  Direction: [¡û]
+Color: RED, Time Remaining: 80.046875s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 4)
+  Direction: [¡û]
+Color: RED, Time Remaining: 170.21875s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 4)
+  Direction: [¡û]
+Color: BLUE, Time Remaining: 80.046875s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 3)
+  Direction: [¡ú]
+Color: BLUE, Time Remaining: 170.1875s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 3)
+  Direction: [¡ú]
+Color: RED, Time Remaining: 79.796875s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 3)
+  Direction: [¡ú]
+Color: RED, Time Remaining: 170.1875s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 3)
+  Direction: [¡ú]
+Color: BLUE, Time Remaining: 79.796875s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 4)
+  Direction: [¡û]
+Color: BLUE, Time Remaining: 170.171875s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 4)
+  Direction: [¡û]
+Color: RED, Time Remaining: 79.5s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 4)
+  Direction: [¡ü]
+Color: RED, Time Remaining: 170.171875s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 4)
+  Direction: [¡ü]
+Color: BLUE, Time Remaining: 79.5s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 3)
+  Direction: [¡û]
+Color: BLUE, Time Remaining: 170.15625s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 3)
+  Direction: [¡û]
+Color: RED, Time Remaining: 79.21875s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (1, 4)
+  Direction: [¡û]
+Color: RED, Time Remaining: 170.15625s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (1, 4)
+  Direction: [¡û]
+Color: BLUE, Time Remaining: 79.21875s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 2)
+  Direction: [¡û]
+Color: BLUE, Time Remaining: 170.140625s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 2)
+  Direction: [¡û]
+Color: RED, Time Remaining: 78.9375s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (1, 3)
+  Direction: [¡ý]
+Color: RED, Time Remaining: 170.140625s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (1, 3)
+  Direction: [¡ý]
+Color: BLUE, Time Remaining: 78.9375s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 1)
+  Direction: [¡ú]
+Color: BLUE, Time Remaining: 170.109375s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 1)
+  Direction: [¡ú]
+Color: RED, Time Remaining: 78.640625s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 3)
+  Direction: [¡ü]
+Color: RED, Time Remaining: 170.109375s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 3)
+  Direction: [¡ü]
+Color: BLUE, Time Remaining: 78.640625s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 2)
+  Direction: [¡û]
+Color: BLUE, Time Remaining: 170.09375s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 2)
+  Direction: [¡û]
+Color: RED, Time Remaining: 78.4375s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (1, 3)
+  Direction: [¡ý]
+Color: RED, Time Remaining: 170.09375s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (1, 3)
+  Direction: [¡ý]
+Color: BLUE, Time Remaining: 78.4375s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 1)
+  Direction: [¡ú]
+Color: BLUE, Time Remaining: 170.046875s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 1)
+  Direction: [¡ú]
+Color: RED, Time Remaining: 78.15625s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (3, 4)
+  Direction: [¡ü]
+Color: RED, Time Remaining: 170.046875s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (3, 4)
+  Direction: [¡ü]
+Color: BLUE, Time Remaining: 78.15625s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 2)
+  Direction: [¡ú]
+Color: BLUE, Time Remaining: 170.015625s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 2)
+  Direction: [¡ú]
+Color: RED, Time Remaining: 77.8125s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played CASCADE action:
+  Coord: (3, 5)
+  Direction: [¡û]
+Color: RED, Time Remaining: 170.015625s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played CASCADE action:
+  Coord: (3, 5)
+  Direction: [¡û]
+Color: BLUE, Time Remaining: 77.8125s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 3)
+  Direction: [¡ú]
+Color: BLUE, Time Remaining: 169.984375s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 3)
+  Direction: [¡ú]
+Color: RED, Time Remaining: 77.484375s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 3)
+  Direction: [¡ü]
+Color: RED, Time Remaining: 169.984375s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 3)
+  Direction: [¡ü]
+Color: BLUE, Time Remaining: 77.484375s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 4)
+  Direction: [¡ú]
+Color: BLUE, Time Remaining: 169.953125s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 4)
+  Direction: [¡ú]
+Color: RED, Time Remaining: 77.1875s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (1, 3)
+  Direction: [¡ú]
+Color: RED, Time Remaining: 169.953125s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (1, 3)
+  Direction: [¡ú]
+Color: BLUE, Time Remaining: 77.1875s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 5)
+  Direction: [¡ú]
+Color: BLUE, Time Remaining: 169.921875s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 5)
+  Direction: [¡ú]
+Color: RED, Time Remaining: 76.90625s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (1, 4)
+  Direction: [¡û]
+Color: RED, Time Remaining: 169.921875s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (1, 4)
+  Direction: [¡û]
+Color: BLUE, Time Remaining: 76.90625s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 6)
+  Direction: [¡û]
+Color: BLUE, Time Remaining: 169.90625s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 6)
+  Direction: [¡û]
+Color: RED, Time Remaining: 76.578125s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (1, 3)
+  Direction: [¡ú]
+Color: RED, Time Remaining: 169.90625s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (1, 3)
+  Direction: [¡ú]
+Color: BLUE, Time Remaining: 76.578125s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 5)
+  Direction: [¡ú]
+Color: BLUE, Time Remaining: 169.890625s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 5)
+  Direction: [¡ú]
+Color: RED, Time Remaining: 76.296875s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 4)
+  Direction: [¡û]
+Color: RED, Time Remaining: 169.890625s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 4)
+  Direction: [¡û]
+Color: BLUE, Time Remaining: 76.296875s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 6)
+  Direction: [¡û]
+Color: BLUE, Time Remaining: 169.875s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 6)
+  Direction: [¡û]
+Color: RED, Time Remaining: 75.828125s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (4, 2)
+  Direction: [¡ü]
+Color: RED, Time Remaining: 169.875s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (4, 2)
+  Direction: [¡ü]
+Color: BLUE, Time Remaining: 75.828125s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 5)
+  Direction: [¡ú]
+Color: BLUE, Time Remaining: 169.84375s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 5)
+  Direction: [¡ú]
+Color: RED, Time Remaining: 75.546875s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (1, 4)
+  Direction: [¡ý]
+Color: RED, Time Remaining: 169.84375s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (1, 4)
+  Direction: [¡ý]
+Color: BLUE, Time Remaining: 75.546875s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 6)
+  Direction: [¡û]
+Color: BLUE, Time Remaining: 169.828125s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 6)
+  Direction: [¡û]
+Color: RED, Time Remaining: 75.21875s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 4)
+  Direction: [¡ü]
+Color: RED, Time Remaining: 169.828125s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 4)
+  Direction: [¡ü]
+Color: BLUE, Time Remaining: 75.21875s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 5)
+  Direction: [¡ú]
+Color: BLUE, Time Remaining: 169.8125s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 5)
+  Direction: [¡ú]
+Color: RED, Time Remaining: 74.921875s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (1, 4)
+  Direction: [¡ý]
+Color: RED, Time Remaining: 169.8125s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (1, 4)
+  Direction: [¡ý]
+Color: BLUE, Time Remaining: 74.921875s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 6)
+  Direction: [¡û]
+Color: BLUE, Time Remaining: 169.796875s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 6)
+  Direction: [¡û]
+Color: RED, Time Remaining: 74.609375s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 4)
+  Direction: [¡ú]
+Color: RED, Time Remaining: 169.796875s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 4)
+  Direction: [¡ú]
+Color: BLUE, Time Remaining: 74.609375s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 5)
+  Direction: [¡û]
+Color: BLUE, Time Remaining: 169.78125s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 5)
+  Direction: [¡û]
+Color: RED, Time Remaining: 74.34375s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 3)
+  Direction: [¡ú]
+Color: RED, Time Remaining: 169.78125s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 3)
+  Direction: [¡ú]
+Color: BLUE, Time Remaining: 74.34375s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 4)
+  Direction: [¡û]
+Color: BLUE, Time Remaining: 169.765625s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 4)
+  Direction: [¡û]
+Color: RED, Time Remaining: 74.078125s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 4)
+  Direction: [¡û]
+Color: RED, Time Remaining: 169.765625s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 4)
+  Direction: [¡û]
+Color: BLUE, Time Remaining: 74.078125s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 3)
+  Direction: [¡ú]
+Color: BLUE, Time Remaining: 169.75s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 3)
+  Direction: [¡ú]
+Color: RED, Time Remaining: 73.765625s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 3)
+  Direction: [¡ú]
+Color: RED, Time Remaining: 169.75s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 3)
+  Direction: [¡ú]
+Color: BLUE, Time Remaining: 73.765625s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 4)
+  Direction: [¡û]
+Color: BLUE, Time Remaining: 169.734375s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 4)
+  Direction: [¡û]
+Color: RED, Time Remaining: 73.46875s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 4)
+  Direction: [¡ü]
+Color: RED, Time Remaining: 169.734375s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 4)
+  Direction: [¡ü]
+Color: BLUE, Time Remaining: 73.46875s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 3)
+  Direction: [¡û]
+Color: BLUE, Time Remaining: 169.71875s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 3)
+  Direction: [¡û]
+Color: RED, Time Remaining: 73.1875s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (1, 4)
+  Direction: [¡û]
+Color: RED, Time Remaining: 169.71875s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (1, 4)
+  Direction: [¡û]
+Color: BLUE, Time Remaining: 73.1875s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 2)
+  Direction: [¡û]
+Color: BLUE, Time Remaining: 169.71875s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 2)
+  Direction: [¡û]
+Color: RED, Time Remaining: 72.890625s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (1, 3)
+  Direction: [¡ý]
+Color: RED, Time Remaining: 169.71875s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (1, 3)
+  Direction: [¡ý]
+Color: BLUE, Time Remaining: 72.890625s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 1)
+  Direction: [¡ú]
+Color: BLUE, Time Remaining: 169.703125s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 1)
+  Direction: [¡ú]
+Color: RED, Time Remaining: 72.578125s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 3)
+  Direction: [¡ü]
+Color: RED, Time Remaining: 169.703125s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 3)
+  Direction: [¡ü]
+Color: BLUE, Time Remaining: 72.578125s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 2)
+  Direction: [¡û]
+Color: BLUE, Time Remaining: 169.703125s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 2)
+  Direction: [¡û]
+Color: RED, Time Remaining: 72.296875s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (1, 3)
+  Direction: [¡ý]
+Color: RED, Time Remaining: 169.703125s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (1, 3)
+  Direction: [¡ý]
+Color: BLUE, Time Remaining: 72.296875s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 1)
+  Direction: [¡ú]
+Color: BLUE, Time Remaining: 169.6875s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 1)
+  Direction: [¡ú]
+Color: RED, Time Remaining: 72.03125s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 5)
+  Direction: [¡û]
+Color: RED, Time Remaining: 169.6875s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 5)
+  Direction: [¡û]
+Color: BLUE, Time Remaining: 72.03125s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 2)
+  Direction: [¡ú]
+Color: BLUE, Time Remaining: 169.671875s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 2)
+  Direction: [¡ú]
+Color: RED, Time Remaining: 71.703125s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 4)
+  Direction: [¡ü]
+Color: RED, Time Remaining: 169.671875s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 4)
+  Direction: [¡ü]
+Color: BLUE, Time Remaining: 71.703125s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 3)
+  Direction: [¡û]
+Color: BLUE, Time Remaining: 169.65625s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 3)
+  Direction: [¡û]
+Color: RED, Time Remaining: 71.40625s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (1, 4)
+  Direction: [¡û]
+Color: RED, Time Remaining: 169.65625s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (1, 4)
+  Direction: [¡û]
+Color: BLUE, Time Remaining: 71.40625s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 2)
+  Direction: [¡û]
+Color: BLUE, Time Remaining: 169.640625s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 2)
+  Direction: [¡û]
+Color: RED, Time Remaining: 71.125s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (1, 3)
+  Direction: [¡ú]
+Color: RED, Time Remaining: 169.640625s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (1, 3)
+  Direction: [¡ú]
+Color: BLUE, Time Remaining: 71.125s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 1)
+  Direction: [¡ú]
+Color: BLUE, Time Remaining: 169.625s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 1)
+  Direction: [¡ú]
+Color: RED, Time Remaining: 70.8125s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (1, 4)
+  Direction: [¡û]
+Color: RED, Time Remaining: 169.625s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (1, 4)
+  Direction: [¡û]
+Color: BLUE, Time Remaining: 70.8125s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 2)
+  Direction: [¡û]
+Color: BLUE, Time Remaining: 169.609375s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 2)
+  Direction: [¡û]
+Color: RED, Time Remaining: 70.53125s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 3)
+  Direction: [¡ü]
+Color: RED, Time Remaining: 169.609375s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 3)
+  Direction: [¡ü]
+Color: BLUE, Time Remaining: 70.53125s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 1)
+  Direction: [¡ú]
+Color: BLUE, Time Remaining: 169.578125s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 1)
+  Direction: [¡ú]
+Color: RED, Time Remaining: 70.203125s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (3, 2)
+  Direction: [¡ý]
+Color: RED, Time Remaining: 169.578125s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (3, 2)
+  Direction: [¡ý]
+Color: BLUE, Time Remaining: 70.203125s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 2)
+  Direction: [¡û]
+Color: BLUE, Time Remaining: 169.5625s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 2)
+  Direction: [¡û]
+Color: RED, Time Remaining: 69.90625s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played CASCADE action:
+  Coord: (1, 3)
+  Direction: [¡ý]
+Color: RED, Time Remaining: 169.5625s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played CASCADE action:
+  Coord: (1, 3)
+  Direction: [¡ý]
+Color: BLUE, Time Remaining: 69.90625s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 1)
+  Direction: [¡ú]
+Color: BLUE, Time Remaining: 169.546875s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 1)
+  Direction: [¡ú]
+Color: RED, Time Remaining: 69.65625s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 3)
+  Direction: [¡ü]
+Color: RED, Time Remaining: 169.546875s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 3)
+  Direction: [¡ü]
+Color: BLUE, Time Remaining: 69.65625s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 2)
+  Direction: [¡û]
+Color: BLUE, Time Remaining: 169.546875s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 2)
+  Direction: [¡û]
+Color: RED, Time Remaining: 69.390625s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (1, 3)
+  Direction: [¡ú]
+Color: RED, Time Remaining: 169.546875s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (1, 3)
+  Direction: [¡ú]
+Color: BLUE, Time Remaining: 69.390625s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 1)
+  Direction: [¡ú]
+Color: BLUE, Time Remaining: 169.53125s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 1)
+  Direction: [¡ú]
+Color: RED, Time Remaining: 69.140625s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (1, 4)
+  Direction: [¡û]
+Color: RED, Time Remaining: 169.53125s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (1, 4)
+  Direction: [¡û]
+Color: BLUE, Time Remaining: 69.140625s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 2)
+  Direction: [¡û]
+Color: BLUE, Time Remaining: 169.53125s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 2)
+  Direction: [¡û]
+Color: RED, Time Remaining: 68.859375s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (1, 3)
+  Direction: [¡ú]
+Color: RED, Time Remaining: 169.53125s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (1, 3)
+  Direction: [¡ú]
+Color: BLUE, Time Remaining: 68.859375s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 1)
+  Direction: [¡ú]
+Color: BLUE, Time Remaining: 169.515625s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 1)
+  Direction: [¡ú]
+Color: RED, Time Remaining: 68.578125s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (1, 4)
+  Direction: [¡ý]
+Color: RED, Time Remaining: 169.515625s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (1, 4)
+  Direction: [¡ý]
+Color: BLUE, Time Remaining: 68.578125s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 2)
+  Direction: [¡ú]
+Color: BLUE, Time Remaining: 169.5s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 2)
+  Direction: [¡ú]
+Color: RED, Time Remaining: 68.21875s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 4)
+  Direction: [¡û]
+Color: RED, Time Remaining: 169.5s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 4)
+  Direction: [¡û]
+Color: BLUE, Time Remaining: 68.21875s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 3)
+  Direction: [¡ú]
+Color: BLUE, Time Remaining: 169.484375s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 3)
+  Direction: [¡ú]
+Color: RED, Time Remaining: 67.90625s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 3)
+  Direction: [¡ü]
+Color: RED, Time Remaining: 169.484375s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 3)
+  Direction: [¡ü]
+Color: BLUE, Time Remaining: 67.90625s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 4)
+  Direction: [¡ú]
+Color: BLUE, Time Remaining: 169.46875s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 4)
+  Direction: [¡ú]
+Color: RED, Time Remaining: 67.625s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (1, 3)
+  Direction: [¡ú]
+Color: RED, Time Remaining: 169.46875s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (1, 3)
+  Direction: [¡ú]
+Color: BLUE, Time Remaining: 67.625s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 5)
+  Direction: [¡ú]
+Color: BLUE, Time Remaining: 169.453125s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 5)
+  Direction: [¡ú]
+Color: RED, Time Remaining: 67.328125s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (1, 4)
+  Direction: [¡û]
+Color: RED, Time Remaining: 169.453125s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (1, 4)
+  Direction: [¡û]
+Color: BLUE, Time Remaining: 67.328125s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 6)
+  Direction: [¡û]
+Color: BLUE, Time Remaining: 169.4375s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 6)
+  Direction: [¡û]
+Color: RED, Time Remaining: 67.078125s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (1, 3)
+  Direction: [¡ú]
+Color: RED, Time Remaining: 169.4375s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (1, 3)
+  Direction: [¡ú]
+Color: BLUE, Time Remaining: 67.078125s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 5)
+  Direction: [¡ú]
+Color: BLUE, Time Remaining: 169.421875s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 5)
+  Direction: [¡ú]
+Color: RED, Time Remaining: 66.859375s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (1, 4)
+  Direction: [¡ý]
+Color: RED, Time Remaining: 169.421875s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (1, 4)
+  Direction: [¡ý]
+Color: BLUE, Time Remaining: 66.859375s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 6)
+  Direction: [¡û]
+Color: BLUE, Time Remaining: 169.40625s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 6)
+  Direction: [¡û]
+Color: RED, Time Remaining: 66.609375s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 4)
+  Direction: [¡û]
+Color: RED, Time Remaining: 169.40625s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 4)
+  Direction: [¡û]
+Color: BLUE, Time Remaining: 66.609375s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 5)
+  Direction: [¡û]
+Color: BLUE, Time Remaining: 169.40625s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 5)
+  Direction: [¡û]
+Color: RED, Time Remaining: 66.28125s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 3)
+  Direction: [¡ú]
+Color: RED, Time Remaining: 169.40625s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 3)
+  Direction: [¡ú]
+Color: BLUE, Time Remaining: 66.28125s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 4)
+  Direction: [¡û]
+Color: BLUE, Time Remaining: 169.390625s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 4)
+  Direction: [¡û]
+Color: RED, Time Remaining: 65.796875s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 4)
+  Direction: [¡ú]
+Color: RED, Time Remaining: 169.390625s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 4)
+  Direction: [¡ú]
+Color: BLUE, Time Remaining: 65.796875s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 3)
+  Direction: [¡ý]
+Color: BLUE, Time Remaining: 169.359375s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 3)
+  Direction: [¡ý]
+Color: RED, Time Remaining: 65.515625s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 5)
+  Direction: [¡ü]
+Color: RED, Time Remaining: 169.34375s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 5)
+  Direction: [¡ü]
+Color: BLUE, Time Remaining: 65.515625s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (1, 3)
+  Direction: [¡ü]
+Color: BLUE, Time Remaining: 169.328125s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (1, 3)
+  Direction: [¡ü]
+Color: RED, Time Remaining: 65.203125s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (1, 5)
+  Direction: [¡ý]
+Color: RED, Time Remaining: 169.328125s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (1, 5)
+  Direction: [¡ý]
+Color: BLUE, Time Remaining: 65.203125s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 3)
+  Direction: [¡ý]
+Color: BLUE, Time Remaining: 169.296875s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 3)
+  Direction: [¡ý]
+Color: RED, Time Remaining: 64.890625s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 5)
+  Direction: [¡ý]
+Color: RED, Time Remaining: 169.296875s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 5)
+  Direction: [¡ý]
+Color: BLUE, Time Remaining: 64.890625s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (1, 3)
+  Direction: [¡ú]
+Color: BLUE, Time Remaining: 169.28125s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (1, 3)
+  Direction: [¡ú]
+Color: RED, Time Remaining: 64.671875s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (3, 3)
+  Direction: [¡ü]
+Color: RED, Time Remaining: 169.28125s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (3, 3)
+  Direction: [¡ü]
+Color: BLUE, Time Remaining: 64.671875s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (1, 4)
+  Direction: [¡ü]
+Color: BLUE, Time Remaining: 169.265625s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (1, 4)
+  Direction: [¡ü]
+Color: RED, Time Remaining: 64.390625s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 3)
+  Direction: [¡ý]
+Color: RED, Time Remaining: 169.265625s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 3)
+  Direction: [¡ý]
+Color: BLUE, Time Remaining: 64.390625s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 4)
+  Direction: [¡ý]
+Color: BLUE, Time Remaining: 169.25s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 4)
+  Direction: [¡ý]
+Color: RED, Time Remaining: 64.046875s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (3, 5)
+  Direction: [¡ý]
+Color: RED, Time Remaining: 169.25s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (3, 5)
+  Direction: [¡ý]
+Color: BLUE, Time Remaining: 64.046875s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (1, 4)
+  Direction: [¡û]
+Color: BLUE, Time Remaining: 169.21875s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (1, 4)
+  Direction: [¡û]
+Color: RED, Time Remaining: 63.734375s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (3, 4)
+  Direction: [¡ü]
+Color: RED, Time Remaining: 169.21875s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (3, 4)
+  Direction: [¡ü]
+Color: BLUE, Time Remaining: 63.734375s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (1, 3)
+  Direction: [¡ü]
+Color: BLUE, Time Remaining: 169.203125s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (1, 3)
+  Direction: [¡ü]
+Color: RED, Time Remaining: 63.328125s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 4)
+  Direction: [¡ý]
+Color: RED, Time Remaining: 169.203125s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 4)
+  Direction: [¡ý]
+Color: BLUE, Time Remaining: 63.328125s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 3)
+  Direction: [¡ý]
+Color: BLUE, Time Remaining: 169.1875s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 3)
+  Direction: [¡ý]
+Color: RED, Time Remaining: 62.90625s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (4, 2)
+  Direction: [¡ü]
+Color: RED, Time Remaining: 169.1875s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (4, 2)
+  Direction: [¡ü]
+Color: BLUE, Time Remaining: 62.90625s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (1, 3)
+  Direction: [¡ú]
+Color: BLUE, Time Remaining: 169.15625s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (1, 3)
+  Direction: [¡ú]
+Color: RED, Time Remaining: 62.625s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (3, 3)
+  Direction: [¡ü]
+Color: RED, Time Remaining: 169.15625s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (3, 3)
+  Direction: [¡ü]
+Color: BLUE, Time Remaining: 62.625s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (1, 4)
+  Direction: [¡ü]
+Color: BLUE, Time Remaining: 169.140625s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (1, 4)
+  Direction: [¡ü]
+Color: RED, Time Remaining: 62.34375s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 3)
+  Direction: [¡ú]
+Color: RED, Time Remaining: 169.140625s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 3)
+  Direction: [¡ú]
+Color: BLUE, Time Remaining: 62.34375s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 4)
+  Direction: [¡û]
+Color: BLUE, Time Remaining: 169.125s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 4)
+  Direction: [¡û]
+Color: RED, Time Remaining: 62.046875s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 4)
+  Direction: [¡û]
+Color: RED, Time Remaining: 169.125s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 4)
+  Direction: [¡û]
+Color: BLUE, Time Remaining: 62.046875s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 3)
+  Direction: [¡ú]
+Color: BLUE, Time Remaining: 169.109375s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 3)
+  Direction: [¡ú]
+Color: RED, Time Remaining: 61.765625s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 3)
+  Direction: [¡ú]
+Color: RED, Time Remaining: 169.109375s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 3)
+  Direction: [¡ú]
+Color: BLUE, Time Remaining: 61.765625s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 4)
+  Direction: [¡û]
+Color: BLUE, Time Remaining: 169.09375s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 4)
+  Direction: [¡û]
+Color: RED, Time Remaining: 61.390625s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 4)
+  Direction: [¡ü]
+Color: RED, Time Remaining: 169.09375s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 4)
+  Direction: [¡ü]
+Color: BLUE, Time Remaining: 61.390625s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 3)
+  Direction: [¡û]
+Color: BLUE, Time Remaining: 169.078125s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 3)
+  Direction: [¡û]
+Color: RED, Time Remaining: 61.1875s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (1, 4)
+  Direction: [¡û]
+Color: RED, Time Remaining: 169.078125s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (1, 4)
+  Direction: [¡û]
+Color: BLUE, Time Remaining: 61.1875s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 2)
+  Direction: [¡û]
+Color: BLUE, Time Remaining: 169.0625s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 2)
+  Direction: [¡û]
+Color: RED, Time Remaining: 60.890625s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (1, 3)
+  Direction: [¡ý]
+Color: RED, Time Remaining: 169.0625s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (1, 3)
+  Direction: [¡ý]
+Color: BLUE, Time Remaining: 60.890625s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 1)
+  Direction: [¡ú]
+Color: BLUE, Time Remaining: 169.03125s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 1)
+  Direction: [¡ú]
+Color: RED, Time Remaining: 60.578125s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 3)
+  Direction: [¡ü]
+Color: RED, Time Remaining: 169.03125s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 3)
+  Direction: [¡ü]
+Color: BLUE, Time Remaining: 60.578125s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 2)
+  Direction: [¡û]
+Color: BLUE, Time Remaining: 169.03125s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 2)
+  Direction: [¡û]
+Color: RED, Time Remaining: 60.3125s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (1, 3)
+  Direction: [¡ý]
+Color: RED, Time Remaining: 169.015625s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (1, 3)
+  Direction: [¡ý]
+Color: BLUE, Time Remaining: 60.3125s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 1)
+  Direction: [¡ú]
+Color: BLUE, Time Remaining: 169.015625s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 1)
+  Direction: [¡ú]
+Color: RED, Time Remaining: 60.0s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 3)
+  Direction: [¡ý]
+Color: RED, Time Remaining: 169.015625s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 3)
+  Direction: [¡ý]
+Color: BLUE, Time Remaining: 60.0s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 2)
+  Direction: [¡ú]
+Color: BLUE, Time Remaining: 168.984375s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 2)
+  Direction: [¡ú]
+Color: RED, Time Remaining: 59.390625s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (3, 2)
+  Direction: [¡ü]
+Color: RED, Time Remaining: 168.984375s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (3, 2)
+  Direction: [¡ü]
+Color: BLUE, Time Remaining: 59.390625s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 3)
+  Direction: [¡ý]
+Color: BLUE, Time Remaining: 168.96875s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 3)
+  Direction: [¡ý]
+Color: RED, Time Remaining: 59.078125s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 2)
+  Direction: [¡ú]
+Color: RED, Time Remaining: 168.96875s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 2)
+  Direction: [¡ú]
+Color: BLUE, Time Remaining: 59.078125s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (1, 3)
+  Direction: [¡ú]
+Color: BLUE, Time Remaining: 168.953125s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (1, 3)
+  Direction: [¡ú]
+Color: RED, Time Remaining: 58.765625s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (3, 4)
+  Direction: [¡ü]
+Color: RED, Time Remaining: 168.953125s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (3, 4)
+  Direction: [¡ü]
+Color: BLUE, Time Remaining: 58.765625s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (1, 4)
+  Direction: [¡ü]
+Color: BLUE, Time Remaining: 168.9375s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (1, 4)
+  Direction: [¡ü]
+Color: RED, Time Remaining: 58.421875s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (3, 3)
+  Direction: [¡ú]
+Color: RED, Time Remaining: 168.9375s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (3, 3)
+  Direction: [¡ú]
+Color: BLUE, Time Remaining: 58.421875s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 4)
+  Direction: [¡û]
+Color: BLUE, Time Remaining: 168.921875s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 4)
+  Direction: [¡û]
+Color: RED, Time Remaining: 58.078125s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (3, 4)
+  Direction: [¡û]
+Color: RED, Time Remaining: 168.921875s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (3, 4)
+  Direction: [¡û]
+Color: BLUE, Time Remaining: 58.078125s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 3)
+  Direction: [¡ú]
+Color: BLUE, Time Remaining: 168.921875s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 3)
+  Direction: [¡ú]
+Color: RED, Time Remaining: 57.75s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (3, 3)
+  Direction: [¡ú]
+Color: RED, Time Remaining: 168.921875s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (3, 3)
+  Direction: [¡ú]
+Color: BLUE, Time Remaining: 57.75s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 4)
+  Direction: [¡û]
+Color: BLUE, Time Remaining: 168.90625s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 4)
+  Direction: [¡û]
+Color: RED, Time Remaining: 57.359375s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (4, 3)
+  Direction: [¡ü]
+Color: RED, Time Remaining: 168.90625s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (4, 3)
+  Direction: [¡ü]
+Color: BLUE, Time Remaining: 57.359375s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 3)
+  Direction: [¡ú]
+Color: BLUE, Time Remaining: 168.875s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 3)
+  Direction: [¡ú]
+Color: RED, Time Remaining: 57.09375s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (3, 3)
+  Direction: [¡ü]
+Color: RED, Time Remaining: 168.875s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (3, 3)
+  Direction: [¡ü]
+Color: BLUE, Time Remaining: 57.09375s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 4)
+  Direction: [¡ú]
+Color: BLUE, Time Remaining: 168.84375s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 4)
+  Direction: [¡ú]
+Color: RED, Time Remaining: 56.8125s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played CASCADE action:
+  Coord: (2, 3)
+  Direction: [¡ý]
+Color: RED, Time Remaining: 168.84375s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played CASCADE action:
+  Coord: (2, 3)
+  Direction: [¡ý]
+Color: BLUE, Time Remaining: 56.8125s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 5)
+  Direction: [¡û]
+Color: BLUE, Time Remaining: 168.84375s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 5)
+  Direction: [¡û]
+Color: RED, Time Remaining: 56.515625s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (3, 4)
+  Direction: [¡ú]
+Color: RED, Time Remaining: 168.84375s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (3, 4)
+  Direction: [¡ú]
+Color: BLUE, Time Remaining: 56.5s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 4)
+  Direction: [¡û]
+Color: BLUE, Time Remaining: 168.84375s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 4)
+  Direction: [¡û]
+Color: RED, Time Remaining: 56.21875s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 4)
+  Direction: [¡û]
+Color: RED, Time Remaining: 168.84375s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 4)
+  Direction: [¡û]
+Color: BLUE, Time Remaining: 56.21875s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 3)
+  Direction: [¡ú]
+Color: BLUE, Time Remaining: 168.828125s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 3)
+  Direction: [¡ú]
+Color: RED, Time Remaining: 55.921875s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 3)
+  Direction: [¡ú]
+Color: RED, Time Remaining: 168.828125s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 3)
+  Direction: [¡ú]
+Color: BLUE, Time Remaining: 55.921875s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 4)
+  Direction: [¡û]
+Color: BLUE, Time Remaining: 168.8125s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 4)
+  Direction: [¡û]
+Color: RED, Time Remaining: 55.59375s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 4)
+  Direction: [¡û]
+Color: RED, Time Remaining: 168.8125s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 4)
+  Direction: [¡û]
+Color: BLUE, Time Remaining: 55.59375s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 3)
+  Direction: [¡ú]
+Color: BLUE, Time Remaining: 168.8125s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 3)
+  Direction: [¡ú]
+Color: RED, Time Remaining: 55.234375s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 3)
+  Direction: [¡ü]
+Color: RED, Time Remaining: 168.8125s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 3)
+  Direction: [¡ü]
+Color: BLUE, Time Remaining: 55.234375s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 4)
+  Direction: [¡ú]
+Color: BLUE, Time Remaining: 168.796875s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 4)
+  Direction: [¡ú]
+Color: RED, Time Remaining: 54.9375s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (1, 3)
+  Direction: [¡ú]
+Color: RED, Time Remaining: 168.796875s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (1, 3)
+  Direction: [¡ú]
+Color: BLUE, Time Remaining: 54.9375s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 5)
+  Direction: [¡ú]
+Color: BLUE, Time Remaining: 168.78125s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 5)
+  Direction: [¡ú]
+Color: RED, Time Remaining: 54.640625s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (1, 4)
+  Direction: [¡ý]
+Color: RED, Time Remaining: 168.78125s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (1, 4)
+  Direction: [¡ý]
+Color: BLUE, Time Remaining: 54.640625s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 6)
+  Direction: [¡û]
+Color: BLUE, Time Remaining: 168.765625s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 6)
+  Direction: [¡û]
+Color: RED, Time Remaining: 54.421875s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 4)
+  Direction: [¡ü]
+Color: RED, Time Remaining: 168.765625s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (2, 4)
+  Direction: [¡ü]
+Color: BLUE, Time Remaining: 54.421875s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 5)
+  Direction: [¡ú]
+Color: BLUE, Time Remaining: 168.75s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 5)
+  Direction: [¡ú]
+Color: RED, Time Remaining: 54.125s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (1, 4)
+  Direction: [¡ý]
+Color: RED, Time Remaining: 168.75s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (1, 4)
+  Direction: [¡ý]
+Color: BLUE, Time Remaining: 54.125s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 6)
+  Direction: [¡û]
+Color: BLUE, Time Remaining: 168.734375s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 6)
+  Direction: [¡û]
+Color: RED, Time Remaining: 53.875s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (3, 5)
+  Direction: [¡û]
+Color: RED, Time Remaining: 168.734375s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (3, 5)
+  Direction: [¡û]
+Color: BLUE, Time Remaining: 53.875s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 5)
+  Direction: [¡û]
+Color: BLUE, Time Remaining: 168.71875s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 5)
+  Direction: [¡û]
+Color: RED, Time Remaining: 53.703125s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (4, 3)
+  Direction: [¡û]
+Color: RED, Time Remaining: 168.71875s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (4, 3)
+  Direction: [¡û]
+Color: BLUE, Time Remaining: 53.703125s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 4)
+  Direction: [¡û]
+Color: BLUE, Time Remaining: 168.703125s
+Color: BLUE, Memory Remaining: NoneMB
+Testing: BLUE played MOVE action:
+  Coord: (0, 4)
+  Direction: [¡û]
+Color: RED, Time Remaining: 53.703125s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (4, 2)
+  Direction: [¡ú]
+Color: RED, Time Remaining: 168.703125s
+Color: RED, Memory Remaining: NoneMB
+Testing: RED played MOVE action:
+  Coord: (4, 2)
+  Direction: [¡ú]
+* referee @ result: player 1 [agent:Agent]
