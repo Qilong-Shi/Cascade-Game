@@ -1,6 +1,9 @@
 .DS_Store
 .venv/
 .claude/
+
+# Python cache files
 __pycache__/
-*.pyc
-agent/_pycache_/
+**/__pycache__/
+*.py[cod]
+*$py.class
