@@ -19,6 +19,8 @@ from collections import defaultdict
 # Efficiency improvement precomputations
 _SORTED_DIRS = tuple(sorted(CARDINAL_DIRECTIONS, key=lambda d: (d.value.r, d.value.c)))
 DIR_LOOKUP = {d: (d.value.r, d.value.c) for d in CARDINAL_DIRECTIONS}
+NEIGHBOR_LOOKUP = {}
+
 
 def legal_actions(board: dict[tuple, CellState], color: PlayerColor, turn_count: int) -> list[Action]:
     """
@@ -72,12 +74,11 @@ def no_adjacent_enemy(board: dict[tuple, CellState], coord: tuple, color: Player
     """
     Check if there are no adjacent enemy stacks to the given coordinate.
     """
-    for direction in _SORTED_DIRS:
-        adjacent_coord = step(coord, direction)
-        if adjacent_coord is not None:
-            adjacent_cell = board.get(adjacent_coord)
-            if adjacent_cell is not None and adjacent_cell.color != color:
-                return False
+    adjacent_coords = NEIGHBOR_LOOKUP[coord]
+    for adjacent_coord in adjacent_coords:
+        adjacent_cell = board.get(adjacent_coord)
+        if adjacent_cell is not None and adjacent_cell.color != color:
+            return False
     return True
 
 def step(coord: tuple, direction: Direction) -> tuple | None:
@@ -92,6 +93,11 @@ def step(coord: tuple, direction: Direction) -> tuple | None:
         return (new_r, new_c)
     return None
 
+# for each coordinate, precompute set of neighbours
+NEIGHBOR_LOOKUP: dict[tuple, frozenset[tuple]] = {
+    (r, c): frozenset(n for n in (step((r, c), d) for d in _SORTED_DIRS) if n is not None)
+    for r in range(BOARD_N) for c in range(BOARD_N)
+}
 
 def apply_move(board: dict[tuple, CellState], action: MoveAction) -> dict[tuple, CellState]:
     """
@@ -220,18 +226,12 @@ def apply_action(board: dict[tuple, CellState], action: Action, color: PlayerCol
     raise ValueError("Unknown action type")
 
 
-def simple_board_hash(board: dict[tuple, CellState], turn_count: int) -> str:
+def simple_board_hash(board: dict[tuple, CellState], turn_count: int) -> tuple:
     """
     Return a simple string hash of the board state.
-
-    Iterates only occupied cells (sorted for canonical ordering — dict iteration
-    is insertion-ordered and apply_action can reorder for the same position).
     """
-    parts = [str(turn_count & 1)]
-    for coord, cell in sorted(board.items()):
-        color_char = "R" if cell.color == PlayerColor.RED else "B"
-        parts.append(f"{coord[0]}{coord[1]}{color_char}{cell.height}")
-    return "".join(parts)
+
+    return (frozenset((coord, cell.color, cell.height) for coord, cell in board.items()), str(turn_count & 1))
 
 def is_game_over(state_counter: defaultdict[int], board: dict[tuple, CellState], turn_count: int, hsh: str | None = None) -> bool:
     # No win conditions during placement phase

@@ -10,3 +10,7 @@ Does legal moves consider add stacks? Yes
 Test against az one
 
 
+Things to try:
+iterative deepening sort moves for optimal alpha beta (test current differnce between alpha beta and normal)
+
+dynamic depth
