@@ -249,7 +249,7 @@ def is_game_over(state_counter: defaultdict[int], board: dict[tuple, CellState],
         return True
 
     # Threefold repetition, if hash is None, then still in placement phase (whcih should be caught already)
-    if hsh is not None and state_counter[hsh] >= 3:
+    if hsh is not None and state_counter.get(hsh, 0) >= 3:
         #print("Game over: Threefold repetition.")
         #print(f"Final board state:\n{simple_board_hash(board, turn_count)}")
         return True

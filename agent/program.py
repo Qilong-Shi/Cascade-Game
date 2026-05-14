@@ -2,14 +2,14 @@
 # Project Part B: Game Playing Agent
 
 import os
-from .moves import apply_action, simple_board_hash
-from referee.game import PlayerColor, Action, PlaceAction, MoveAction, EatAction, CascadeAction
+from .moves import apply_action, legal_actions, simple_board_hash
+from referee.game import PlayerColor, Action, PLACEMENT_TURNS
 
 from collections import defaultdict
 from .minimax import alpha_beta
 from .utils import rewrap_action, unwrap_action
 
-DEFAULT_DEPTH = 4
+DEFAULT_DEPTH = 3
 
 class Agent:
     """
@@ -27,56 +27,37 @@ class Agent:
         self.board = {}
         self.state_counter = defaultdict(int)
 
-        # for setting custom depths for testing
+        # Use the environment override only as a maximum. The agent still caps
+        # search dynamically so it can return before Gradescope timeouts.
         self.depth = int(os.environ.get(f"{color.name}_DEPTH", DEFAULT_DEPTH))
-        match color:
-            case PlayerColor.RED:
-                print(f"Testing: I am playing as RED (first player), depth={self.depth}")
-            case PlayerColor.BLUE:
-                print(f"Testing: I am playing as BLUE, depth={self.depth}")
+        self.debug = os.environ.get("AGENT_DEBUG") == "1"
+        self._debug(f"Playing as {color.name}, max_depth={self.depth}")
 
     def action(self, **_referee: dict) -> Action | None:
         """
         This method is called by the referee each time it is the agent's turn
         to take an action. It must always return an action object.
         """
+        actions = legal_actions(self.board, self._color, self._turn_count)
+        if not actions:
+            return None
 
-        # Below we have hardcoded actions to be played depending on whether
-        # the agent is playing as BLUE or RED. Obviously this won't work beyond
-        # the initial moves of the game, so you should use some game playing
-        # technique(s) to determine the best action to take.
+        if self._turn_count < PLACEMENT_TURNS:
+            best_action = self._choose_placement(actions)
+            return rewrap_action(best_action)
 
-        # During placement phase (first 8 turns total, 4 per player)
-        # if self._turn_count < 4:
-        #     match self._color:
-        #         case PlayerColor.RED:
-        #             print("Testing: RED is playing a PLACE action")
-        #             return PlaceAction(Coord(0, self._turn_count))
-        #         case PlayerColor.BLUE:
-        #             print("Testing: BLUE is playing a PLACE action")
-        #             return PlaceAction(Coord(7, self._turn_count))
-
-        # # During play phase
-        # match self._color:
-        #     case PlayerColor.RED:
-        #         print("Testing: RED is playing a MOVE action")
-        #         return MoveAction(Coord(0, 0), Direction.Down)
-        #     case PlayerColor.BLUE:
-        #         print("Testing: BLUE is playing a MOVE action")
-        #         return MoveAction(Coord(7, 0), Direction.Up)
-        # return minimax(self.board, self.depth, self._color, self._turn_count)[1]
-
-
-        #test dynamic depth adjustment
-        # if self._turn_count < 50:
-        #     self.depth = 4
-        # elif self._turn_count < 100:
-        #     self.depth = 5
-        # elif self._turn_count < 200:
-        #     self.depth = 6
-        # else:
-        #     self.depth = 7
-        best_action = alpha_beta(self.state_counter, self.board, self.depth, self._color, self._turn_count, float('-inf'), float('inf'))[1]
+        depth = self._effective_depth(len(actions), _referee.get("time_remaining"))
+        best_action = alpha_beta(
+            self.state_counter,
+            self.board,
+            depth,
+            self._color,
+            self._turn_count,
+            float('-inf'),
+            float('inf')
+        )[1]
+        if best_action is None:
+            best_action = actions[0]
         return rewrap_action(best_action)
 
     def update(self, color: PlayerColor, action: Action, **referee: dict):
@@ -95,28 +76,43 @@ class Agent:
         # Update board:
         self.board = apply_action(self.board, action, color)
 
-        # Performance evaluaton
-        print(f"Color: {color}, Time Remaining: {referee['time_remaining']}s")
-        print(f"Color: {color}, Memory Remaining: {referee['space_remaining']}MB")
+        if self.debug:
+            self._debug(
+                f"{color.name} played {type(action).__name__}; "
+                f"time={referee.get('time_remaining')}s; "
+                f"memory={referee.get('space_remaining')}MB"
+            )
 
-        # There are four possible action types: PLACE, MOVE, EAT, and CASCADE.
-        # Below we check which type of action was played and print out the
-        # details of the action for demonstration purposes. You should replace
-        # this with your own logic to update your agent's internal game state.
-        match action:
-            case PlaceAction(coord):
-                print(f"Testing: {color} played PLACE action at {coord}")
-            case MoveAction(coord, direction):
-                print(f"Testing: {color} played MOVE action:")
-                print(f"  Coord: {coord}")
-                print(f"  Direction: {direction}")
-            case EatAction(coord, direction):
-                print(f"Testing: {color} played EAT action:")
-                print(f"  Coord: {coord}")
-                print(f"  Direction: {direction}")
-            case CascadeAction(coord, direction):
-                print(f"Testing: {color} played CASCADE action:")
-                print(f"  Coord: {coord}")
-                print(f"  Direction: {direction}")
-            case _:
-                raise ValueError(f"Unknown action type: {action}")
+    def _choose_placement(self, actions: list[Action]) -> Action:
+        """
+        Pick a legal placement quickly. Searching the full placement tree has
+        very high branching and was the source of timeout failures.
+        """
+        def placement_score(action: Action) -> tuple[float, int, int]:
+            coord = action.coord
+            row = coord[0]
+            col = coord[1]
+            distance = abs(row - 3.5) + abs(col - 3.5)
+            return (-distance, row, col)
+
+        return max(actions, key=placement_score)
+
+    def _effective_depth(self, action_count: int, time_remaining: float | None) -> int:
+        depth = max(1, self.depth)
+
+        if action_count > 24:
+            depth = min(depth, 2)
+        elif action_count > 12:
+            depth = min(depth, 3)
+
+        if time_remaining is not None:
+            if time_remaining < 10:
+                depth = 1
+            elif time_remaining < 40:
+                depth = min(depth, 2)
+
+        return depth
+
+    def _debug(self, message: str) -> None:
+        if self.debug:
+            print(message)

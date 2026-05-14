@@ -1,7 +1,17 @@
 from .moves import apply_action, legal_actions, is_game_over, simple_board_hash
 from referee.game import PlayerColor, Action, Coord, CellState, PLACEMENT_TURNS
 from collections import defaultdict
-import numpy as np
+from math import exp
+
+def push_state(state_counter: defaultdict[int], hsh: tuple) -> None:
+    state_counter[hsh] = state_counter.get(hsh, 0) + 1
+
+def pop_state(state_counter: defaultdict[int], hsh: tuple) -> None:
+    count = state_counter.get(hsh, 0)
+    if count <= 1:
+        state_counter.pop(hsh, None)
+    else:
+        state_counter[hsh] = count - 1
 
 def alpha_beta(state_counter: defaultdict[int], board: dict[Coord, CellState], depth: int, color: PlayerColor, turn_count: int, alpha: float, beta: float) -> tuple[float, Action | None]:
     """
@@ -12,12 +22,12 @@ def alpha_beta(state_counter: defaultdict[int], board: dict[Coord, CellState], d
     hsh = None
     if turn_count >= PLACEMENT_TURNS:
         hsh = simple_board_hash(board, turn_count)
-        state_counter[hsh] += 1
+        push_state(state_counter, hsh)
 
 
     if depth == 0 or is_game_over(state_counter, board, turn_count, hsh):
         if hsh is not None:
-            state_counter[hsh] -= 1
+            pop_state(state_counter, hsh)
         return evaluate(state_counter, board, turn_count, hsh), None
 
     best_action = None # allows for single return call
@@ -50,7 +60,7 @@ def alpha_beta(state_counter: defaultdict[int], board: dict[Coord, CellState], d
         best_eval = min_eval
     
     if hsh is not None:
-        state_counter[hsh] -= 1
+        pop_state(state_counter, hsh)
     return best_eval, best_action
 
 # very simple evaluation function, just return difference in number of tokens
@@ -89,7 +99,7 @@ def evaluate(state_counter: defaultdict[int], board: dict[Coord, CellState], tur
             win_score = -1000 + turn_count # arbitrary large negative value to represent a loss
 
         if hsh is not None: # None hsh means still in placement phase
-            state_counter[hsh] += 1 # decrement state counter to check for win conditions without counting current state
+            push_state(state_counter, hsh) # increment temporarily to check for draw conditions
             if is_game_over(state_counter, board, turn_count, hsh) and (red_tokens and blue_tokens): # if game finishes from draw
                 tie_score = -TIE_WEIGHT # bad for red, since red wants to win as it has a starting advantage
                 if red_tokens > blue_tokens: # even worse for red since it is winning, it does not want to draw
@@ -97,11 +107,11 @@ def evaluate(state_counter: defaultdict[int], board: dict[Coord, CellState], tur
                 else:
                     tie_score *= -1 # good for red since it is losing, it wants to draw, makes tie_score positive
 
-            state_counter[hsh] -= 1 # restore state counter
+            pop_state(state_counter, hsh) # restore state counter
 
         # reward turn limit wins since they are the same
 
-        turn_limit_score = diff_score * 1/(1+np.exp(-0.05*(turn_count-100))) * 100
+        turn_limit_score = diff_score * 1/(1+exp(-0.05*(turn_count-100))) * 100
 
 
     eval_score = center_score + tie_score + diff_score + turn_limit_score + win_score
