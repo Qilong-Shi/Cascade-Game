@@ -3,10 +3,7 @@ from referee.game import (
     CascadeAction,
     EatAction,
     MoveAction,
-    PlayerColor,
     PlaceAction,
-    CellState,
-    Direction,
     Coord
 )
 

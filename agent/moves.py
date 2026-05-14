@@ -76,9 +76,9 @@ def no_adjacent_enemy(board: dict[tuple, CellState], coord: tuple, color: Player
     """
     adjacent_coords = NEIGHBOR_LOOKUP[coord]
     for adjacent_coord in adjacent_coords:
-            adjacent_cell = board.get(adjacent_coord)
-            if adjacent_cell is not None and adjacent_cell.color != color:
-                return False
+        adjacent_cell = board.get(adjacent_coord)
+        if adjacent_cell is not None and adjacent_cell.color != color:
+            return False
     return True
 
 def step(coord: tuple, direction: Direction) -> tuple | None:

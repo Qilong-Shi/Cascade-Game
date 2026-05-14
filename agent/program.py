@@ -3,8 +3,7 @@
 
 import os
 from .moves import apply_action, simple_board_hash
-from referee.game import PlayerColor, Coord, Direction, \
-    Action, PlaceAction, MoveAction, EatAction, CascadeAction
+from referee.game import PlayerColor, Action, PlaceAction, MoveAction, EatAction, CascadeAction
 
 from collections import defaultdict
 from .minimax import alpha_beta
@@ -18,7 +17,7 @@ class Agent:
     respond to various Cascade game events.
     """
 
-    def __init__(self, color: PlayerColor, **referee: dict):
+    def __init__(self, color: PlayerColor, **_referee: dict):
         """
         This constructor method runs when the referee instantiates the agent.
         Any setup and/or precomputation should be done here.
@@ -36,7 +35,7 @@ class Agent:
             case PlayerColor.BLUE:
                 print(f"Testing: I am playing as BLUE, depth={self.depth}")
 
-    def action(self, **referee: dict) -> Action | None:
+    def action(self, **_referee: dict) -> Action | None:
         """
         This method is called by the referee each time it is the agent's turn
         to take an action. It must always return an action object.
