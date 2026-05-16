@@ -11,7 +11,13 @@ import random
 
 from collections import defaultdict
 
-from agent.minimax import is_terminal
+from agent.minimax import (
+    _repetition_signature,
+    _updated_repetition_signature,
+    draw_score,
+    evaluate_state,
+    is_terminal,
+)
 from agent.moves import apply_action, is_game_over, legal_actions, simple_board_hash
 from agent.search_state import SearchState, decode_referee_action, encode_referee_action
 from referee.game import CellState, MAX_TURNS, PLACEMENT_TURNS, PlayerColor
@@ -144,10 +150,45 @@ def check_terminal_semantics() -> None:
     assert is_terminal(repeated, repetitions)
 
 
+def check_terminal_scoring_precedence() -> None:
+    repeated_at_turn_limit = SearchState.from_sparse(
+        {
+            (0, 0): CellState(PlayerColor.RED, 3),
+            (7, 7): CellState(PlayerColor.BLUE, 1),
+        },
+        PLACEMENT_TURNS + MAX_TURNS,
+        PlayerColor.RED,
+    )
+    repetitions = defaultdict(int)
+    repetitions[repeated_at_turn_limit.hash_key] = 3
+    assert evaluate_state(
+        repeated_at_turn_limit,
+        PlayerColor.RED.value,
+        repetitions,
+    ) == draw_score(3, 1)
+
+
+def check_repetition_signature_updates() -> None:
+    repetitions = defaultdict(int)
+    key = 123456789
+    signature = _repetition_signature(repetitions)
+    repetitions[key] = 1
+    signature = _updated_repetition_signature(signature, key, 0, 1)
+    assert signature == _repetition_signature(repetitions)
+    repetitions[key] = 2
+    signature = _updated_repetition_signature(signature, key, 1, 2)
+    assert signature == _repetition_signature(repetitions)
+    repetitions.pop(key)
+    signature = _updated_repetition_signature(signature, key, 2, 0)
+    assert signature == _repetition_signature(repetitions)
+
+
 def main() -> None:
     check_fixed_scenarios()
     check_random_play()
     check_terminal_semantics()
+    check_terminal_scoring_precedence()
+    check_repetition_signature_updates()
     print("engine checks passed")
 
 

@@ -11,7 +11,8 @@ referee/
 output.ans
 profile.out
 
-
+battlefield_arena/
+battlefield_page/
 
 # Python cache files
 __pycache__/

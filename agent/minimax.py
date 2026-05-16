@@ -58,7 +58,7 @@ class TTEntry:
 class SearchTimeout(RuntimeError):
     pass
 
-
+# Legacy adapter for older diagnostic scripts; the hot path is `iterative_deepening_search()` directly on `SearchState`
 def iterative_deepening_search(
     state: SearchState,
     repetition_counts: defaultdict[int, int],
@@ -69,6 +69,7 @@ def iterative_deepening_search(
     me_int = color_to_int(me)
     stats = SearchStats()
     transposition_table: dict[tuple[int, int, int], TTEntry] = {}
+    repetition_signature = _repetition_signature(repetition_counts)
     best_value = evaluate_state(state, me_int, repetition_counts)
     best_move: int | None = None
     preferred_move: int | None = None
@@ -86,6 +87,7 @@ def iterative_deepening_search(
                 deadline,
                 transposition_table,
                 repetition_counts,
+                repetition_signature,
                 stats,
                 ply=0,
                 preferred_move=preferred_move,
@@ -120,12 +122,21 @@ def alpha_beta(
     continue to work while the engine internals evolve.
     """
     state = SearchState.from_sparse(board, turn_count, color)
-    value, move, _stats = iterative_deepening_search(
+    stats = SearchStats()
+    value, move = _alpha_beta(
         state,
-        state_counter,
-        me,
         depth,
+        alpha,
+        beta,
+        me.value,
         time.perf_counter() + 60.0,
+        {},
+        state_counter,
+        _repetition_signature(state_counter),
+        stats,
+        ply=0,
+        preferred_move=None,
+        extension_remaining=TACTICAL_EXTENSION_LIMIT,
     )
     return value, None if move is None else decode_referee_action(move)
 
@@ -139,6 +150,7 @@ def _alpha_beta(
     deadline: float,
     tt: dict[tuple[int, int, int], TTEntry],
     repetition_counts: defaultdict[int, int],
+    repetition_signature: int,
     stats: SearchStats,
     ply: int,
     preferred_move: int | None,
@@ -171,13 +183,13 @@ def _alpha_beta(
             deadline,
             tt,
             repetition_counts,
+            repetition_signature,
             stats,
             ply,
             extension_remaining - 1,
         )
 
-    repetition_count = repetition_counts.get(state.hash_key, 0)
-    tt_key = (state.hash_key, state.turn_count, repetition_count)
+    tt_key = (state.hash_key, state.turn_count, repetition_signature)
     tt_entry = tt.get(tt_key)
     if tt_entry is not None and tt_entry.depth >= depth:
         stats.tt_hits += 1
@@ -210,6 +222,7 @@ def _alpha_beta(
         deadline,
         tt,
         repetition_counts,
+        repetition_signature,
         stats,
         ply,
         extension_remaining,
@@ -236,6 +249,7 @@ def _search_actions(
     deadline: float,
     tt: dict[tuple[int, int, int], TTEntry],
     repetition_counts: defaultdict[int, int],
+    repetition_signature: int,
     stats: SearchStats,
     ply: int,
     extension_remaining: int,
@@ -247,8 +261,16 @@ def _search_actions(
     for action in actions:
         undo = state.make_move(action)
         child_hash_added = False
+        child_repetition_signature = repetition_signature
         if state.play_phase:
+            old_count = repetition_counts.get(state.hash_key, 0)
             repetition_counts[state.hash_key] += 1
+            child_repetition_signature = _updated_repetition_signature(
+                repetition_signature,
+                state.hash_key,
+                old_count,
+                old_count + 1,
+            )
             child_hash_added = True
         try:
             value, _ = _alpha_beta(
@@ -260,6 +282,7 @@ def _search_actions(
                 deadline,
                 tt,
                 repetition_counts,
+                child_repetition_signature,
                 stats,
                 ply + 1,
                 preferred_move=None,
@@ -382,6 +405,10 @@ def evaluate_state(
         if my_tokens == 0:
             return LOSS_SCORE
 
+        repeat_count = repetition_counts.get(state.hash_key, 0)
+        if repeat_count >= 3 or not state.has_legal_actions():
+            return draw_score(my_tokens, opp_tokens)
+
         play_turn = state.turn_count - PLACEMENT_TURNS
         if play_turn >= MAX_TURNS:
             token_diff = my_tokens - opp_tokens
@@ -390,10 +417,6 @@ def evaluate_state(
             if token_diff < 0:
                 return -TURN_LIMIT_WIN_SCORE + token_diff
             return 0
-
-        repeat_count = repetition_counts.get(state.hash_key, 0)
-        if repeat_count >= 3 or not state.has_legal_actions():
-            return draw_score(my_tokens, opp_tokens)
 
     material_weight = 24
     tactical_weight = 8
@@ -485,3 +508,20 @@ def _pop_repetition(repetition_counts: defaultdict[int, int], key: int) -> None:
         repetition_counts.pop(key, None)
     else:
         repetition_counts[key] = count - 1
+
+
+def _repetition_component(key: int, count: int) -> int:
+    if count <= 0:
+        return 0
+    return ((key * 0x9E3779B97F4A7C15) ^ (count * 0xBF58476D1CE4E5B9)) & 0xFFFFFFFFFFFFFFFF
+
+
+def _repetition_signature(repetition_counts: defaultdict[int, int]) -> int:
+    signature = 0
+    for key, count in repetition_counts.items():
+        signature ^= _repetition_component(key, count)
+    return signature
+
+
+def _updated_repetition_signature(signature: int, key: int, old_count: int, new_count: int) -> int:
+    return signature ^ _repetition_component(key, old_count) ^ _repetition_component(key, new_count)

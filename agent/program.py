@@ -18,7 +18,7 @@ from .search_state import (
 
 
 DEFAULT_MAX_DEPTH = 8
-DEFAULT_MOVE_BUDGET_SECONDS = 0.50
+DEFAULT_MOVE_BUDGET_SECONDS = 0.08
 
 
 class Agent:
@@ -78,7 +78,8 @@ class Agent:
         def placement_score(action: int) -> tuple[float, int]:
             row, col = divmod(action, 8)
             distance = abs(row - 3.5) + abs(col - 3.5)
-            return (-distance, -action)
+            tie_break = -action if self._color == PlayerColor.RED else action
+            return (-distance, tie_break)
 
         return max(actions, key=placement_score)
 
