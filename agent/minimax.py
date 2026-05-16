@@ -1,272 +1,487 @@
-from .moves import apply_action, legal_actions, is_game_over, simple_board_hash, step
-from referee.game import (
-    PlayerColor,
-    Action,
-    Coord,
-    CellState,
-    BOARD_N,
-    PLACEMENT_TURNS,
-    MAX_TURNS,
-    CARDINAL_DIRECTIONS,
-)
+from __future__ import annotations
+
+import os
+import time
 from collections import defaultdict
+from dataclasses import dataclass
+
+from referee.game import MAX_TURNS, PLACEMENT_TURNS, CellState, Coord, PlayerColor
+
+from .search_state import (
+    BLUE,
+    CASCADE,
+    EAT,
+    RED,
+    CENTER_WEIGHTS,
+    EDGE_WEIGHTS,
+    NEXT_INDEX,
+    SearchState,
+    action_kind,
+    color_to_int,
+    decode_referee_action,
+    decode_source_and_direction,
+)
 
 
-WIN_SCORE = 100_000
-TURN_LIMIT_WIN_SCORE = 20_000
+WIN_SCORE = 1_000_000
+LOSS_SCORE = -WIN_SCORE
+TURN_LIMIT_WIN_SCORE = 100_000
+DRAW_BIAS = 50
+REPETITION_WEIGHT = 12
 
-def push_state(state_counter: defaultdict[int], hsh: tuple) -> None:
-    state_counter[hsh] = state_counter.get(hsh, 0) + 1
+EXACT = 0
+LOWER_BOUND = 1
+UPPER_BOUND = 2
 
-def pop_state(state_counter: defaultdict[int], hsh: tuple) -> None:
-    count = state_counter.get(hsh, 0)
-    if count <= 1:
-        state_counter.pop(hsh, None)
-    else:
-        state_counter[hsh] = count - 1
+TACTICAL_EXTENSION_LIMIT = int(os.environ.get("AGENT_TACTICAL_EXTENSION", "0"))
+MIN_EXTENSION_ENEMY_LOSS = 2
 
-def alpha_beta(state_counter: defaultdict[int], board: dict[Coord, CellState], depth: int, color: PlayerColor, turn_count: int, alpha: float, beta: float) -> tuple[float, Action | None]:
+
+@dataclass(slots=True)
+class SearchStats:
+    nodes: int = 0
+    leaves: int = 0
+    cutoffs: int = 0
+    tt_hits: int = 0
+    completed_depth: int = 0
+    max_ply: int = 0
+
+
+@dataclass(slots=True)
+class TTEntry:
+    depth: int
+    value: float
+    flag: int
+    best_move: int | None
+
+
+class SearchTimeout(RuntimeError):
+    pass
+
+
+def iterative_deepening_search(
+    state: SearchState,
+    repetition_counts: defaultdict[int, int],
+    me: PlayerColor | int,
+    max_depth: int,
+    deadline: float,
+) -> tuple[float, int | None, SearchStats]:
+    me_int = color_to_int(me)
+    stats = SearchStats()
+    transposition_table: dict[tuple[int, int, int], TTEntry] = {}
+    best_value = evaluate_state(state, me_int, repetition_counts)
+    best_move: int | None = None
+    preferred_move: int | None = None
+
+    for depth in range(1, max_depth + 1):
+        if time.perf_counter() >= deadline:
+            break
+        try:
+            value, move = _alpha_beta(
+                state,
+                depth,
+                float("-inf"),
+                float("inf"),
+                me_int,
+                deadline,
+                transposition_table,
+                repetition_counts,
+                stats,
+                ply=0,
+                preferred_move=preferred_move,
+                extension_remaining=TACTICAL_EXTENSION_LIMIT,
+            )
+        except SearchTimeout:
+            break
+        best_value = value
+        if move is not None:
+            best_move = move
+            preferred_move = move
+        stats.completed_depth = depth
+
+    return best_value, best_move, stats
+
+
+def alpha_beta(
+    state_counter: defaultdict[int, int],
+    board: dict[Coord | tuple[int, int], CellState],
+    depth: int,
+    color: PlayerColor,
+    turn_count: int,
+    me: PlayerColor,
+    alpha: float,
+    beta: float,
+) -> tuple[float, object | None]:
     """
-    Return the best action for the current player using the alpha-beta pruning algorithm.
+    Backwards-compatible wrapper for older diagnostic scripts.
+
+    The hot path uses `iterative_deepening_search()` directly on `SearchState`;
+    this adapter exists only so legacy utilities that still pass sparse boards
+    continue to work while the engine internals evolve.
     """
-    # Hashing + state_counter only matter for threefold-repetition detection, which
-    # is_game_over short-circuits past during placement. Skip the work entirely there.
-    hsh = None
-    if turn_count >= PLACEMENT_TURNS:
-        hsh = simple_board_hash(board, turn_count)
-        push_state(state_counter, hsh)
+    state = SearchState.from_sparse(board, turn_count, color)
+    value, move, _stats = iterative_deepening_search(
+        state,
+        state_counter,
+        me,
+        depth,
+        time.perf_counter() + 60.0,
+    )
+    return value, None if move is None else decode_referee_action(move)
 
 
-    if depth == 0 or is_game_over(state_counter, board, turn_count, hsh):
-        if hsh is not None:
-            pop_state(state_counter, hsh)
-        return evaluate(state_counter, board, turn_count, hsh), None
+def _alpha_beta(
+    state: SearchState,
+    depth: int,
+    alpha: float,
+    beta: float,
+    me: int,
+    deadline: float,
+    tt: dict[tuple[int, int, int], TTEntry],
+    repetition_counts: defaultdict[int, int],
+    stats: SearchStats,
+    ply: int,
+    preferred_move: int | None,
+    extension_remaining: int,
+) -> tuple[float, int | None]:
+    stats.nodes += 1
+    stats.max_ply = max(stats.max_ply, ply)
+    if stats.nodes & 0xFF == 0 and time.perf_counter() >= deadline:
+        raise SearchTimeout
 
-    best_action = None # allows for single return call
-    best_eval = None
+    if is_terminal(state, repetition_counts):
+        stats.leaves += 1
+        return evaluate_state(state, me, repetition_counts), None
 
-    if color == PlayerColor.RED:
-        max_eval = float('-inf')
-        for action in legal_actions(board, color, turn_count):
-            new_board = apply_action(board, action, color)
-            value, _ = alpha_beta(state_counter, new_board, depth - 1, PlayerColor.BLUE, turn_count + 1, alpha, beta)
-            if value > max_eval:
-                max_eval = value
-                best_action = action
-            alpha = max(alpha, value)
-            if beta <= alpha:
-                break
-        best_eval = max_eval
+    if depth <= 0:
+        if extension_remaining <= 0:
+            stats.leaves += 1
+            return evaluate_state(state, me, repetition_counts), None
+        forcing = forcing_actions(state)
+        if not forcing:
+            stats.leaves += 1
+            return evaluate_state(state, me, repetition_counts), None
+        return _search_actions(
+            state,
+            forcing,
+            0,
+            alpha,
+            beta,
+            me,
+            deadline,
+            tt,
+            repetition_counts,
+            stats,
+            ply,
+            extension_remaining - 1,
+        )
 
-    else:
-        min_eval = float('inf')
-        for action in legal_actions(board, color, turn_count):
-            new_board = apply_action(board, action, color)
-            value, _ = alpha_beta(state_counter, new_board, depth - 1, PlayerColor.RED, turn_count + 1, alpha, beta)
-            if value < min_eval:
-                min_eval = value
-                best_action = action
-            beta = min(beta, value)
-            if beta <= alpha:
-                break
-        best_eval = min_eval
-    
-    if hsh is not None:
-        pop_state(state_counter, hsh)
-    return best_eval, best_action
+    repetition_count = repetition_counts.get(state.hash_key, 0)
+    tt_key = (state.hash_key, state.turn_count, repetition_count)
+    tt_entry = tt.get(tt_key)
+    if tt_entry is not None and tt_entry.depth >= depth:
+        stats.tt_hits += 1
+        if tt_entry.flag == EXACT:
+            return tt_entry.value, tt_entry.best_move
+        if tt_entry.flag == LOWER_BOUND:
+            alpha = max(alpha, tt_entry.value)
+        else:
+            beta = min(beta, tt_entry.value)
+        if alpha >= beta:
+            return tt_entry.value, tt_entry.best_move
 
-# Lightweight material-only helper kept for tests / quick diagnostics.
-def evaluate_board(board: dict[Coord, CellState]) -> float:
-    red_tokens = sum(cell.height for cell in board.values() if cell.color == PlayerColor.RED)                                          
-    blue_tokens = sum(cell.height for cell in board.values() if cell.color == PlayerColor.BLUE)
-    return red_tokens - blue_tokens
+    actions = ordered_actions(
+        state,
+        preferred_move if preferred_move is not None else tt_entry.best_move if tt_entry else None,
+    )
+    if not actions:
+        stats.leaves += 1
+        return evaluate_state(state, me, repetition_counts), None
 
-# returns positive if good for red, negative if good for blue
-def evaluate(state_counter: defaultdict[int], board: dict[Coord, CellState], turn_count: int, hsh: str | None = None) -> float:
-    """
-    Heuristic value from RED's perspective.
+    alpha_orig = alpha
+    beta_orig = beta
+    value, best_move = _search_actions(
+        state,
+        actions,
+        depth - 1,
+        alpha,
+        beta,
+        me,
+        deadline,
+        tt,
+        repetition_counts,
+        stats,
+        ply,
+        extension_remaining,
+    )
 
-    The old evaluator mostly measured token difference.  That was enough to
-    beat weak play, but it missed the positions that decide Cascade games:
-    immediate captures, mobility, whether strength is concentrated in useful
-    stacks, and whether material is stranded on the board edge where a cascade
-    can remove it cheaply.
-    """
-    features = board_features(board)
-    red = features[PlayerColor.RED]
-    blue = features[PlayerColor.BLUE]
+    flag = EXACT
+    if value <= alpha_orig:
+        flag = UPPER_BOUND
+    elif value >= beta_orig:
+        flag = LOWER_BOUND
+    previous = tt.get(tt_key)
+    if previous is None or depth >= previous.depth:
+        tt[tt_key] = TTEntry(depth, value, flag, best_move)
+    return value, best_move
 
-    red_tokens = red["tokens"]
-    blue_tokens = blue["tokens"]
-    material_diff = red_tokens - blue_tokens
 
-    if turn_count >= PLACEMENT_TURNS:
-        if blue_tokens == 0:
-            return WIN_SCORE - turn_count
-        if red_tokens == 0:
-            return -WIN_SCORE + turn_count
+def _search_actions(
+    state: SearchState,
+    actions: list[int],
+    next_depth: int,
+    alpha: float,
+    beta: float,
+    me: int,
+    deadline: float,
+    tt: dict[tuple[int, int, int], TTEntry],
+    repetition_counts: defaultdict[int, int],
+    stats: SearchStats,
+    ply: int,
+    extension_remaining: int,
+) -> tuple[float, int | None]:
+    maximizing = state.side_to_move == me
+    best_move: int | None = None
+    best_value = float("-inf") if maximizing else float("inf")
 
-        play_turn = turn_count - PLACEMENT_TURNS
+    for action in actions:
+        undo = state.make_move(action)
+        child_hash_added = False
+        if state.play_phase:
+            repetition_counts[state.hash_key] += 1
+            child_hash_added = True
+        try:
+            value, _ = _alpha_beta(
+                state,
+                next_depth,
+                alpha,
+                beta,
+                me,
+                deadline,
+                tt,
+                repetition_counts,
+                stats,
+                ply + 1,
+                preferred_move=None,
+                extension_remaining=extension_remaining,
+            )
+        finally:
+            if child_hash_added:
+                _pop_repetition(repetition_counts, state.hash_key)
+            state.unmake_move(undo)
+
+        if maximizing:
+            if value > best_value:
+                best_value = value
+                best_move = action
+            alpha = max(alpha, best_value)
+        else:
+            if value < best_value:
+                best_value = value
+                best_move = action
+            beta = min(beta, best_value)
+
+        if alpha >= beta:
+            stats.cutoffs += 1
+            break
+
+    return best_value, best_move
+
+
+def ordered_actions(state: SearchState, preferred_move: int | None = None) -> list[int]:
+    actions = state.generate_actions()
+    if not actions:
+        return actions
+
+    def ordering_score(action: int) -> tuple[int, int, int, int]:
+        if action == preferred_move:
+            return (3, 0, 0, 0)
+        kind = action_kind(action)
+        if kind == EAT:
+            idx, direction = decode_source_and_direction(action)
+            target = NEXT_INDEX[idx][direction]
+            return (2, state.heights[target], 0, -action)
+        if kind == CASCADE:
+            return (1, cascade_pressure(state, action), 0, -action)
+        return (0, 0, 0, -action)
+
+    actions.sort(key=ordering_score, reverse=True)
+    return actions
+
+
+def forcing_actions(state: SearchState) -> list[int]:
+    actions = ordered_actions(state)
+    forcing: list[int] = []
+    for action in actions:
+        kind = action_kind(action)
+        if kind == EAT:
+            idx, direction = decode_source_and_direction(action)
+            target = NEXT_INDEX[idx][direction]
+            if target != -1 and state.heights[target] >= MIN_EXTENSION_ENEMY_LOSS:
+                forcing.append(action)
+        elif kind == CASCADE and cascade_pressure(state, action) > 0:
+            forcing.append(action)
+    return forcing
+
+
+def cascade_pressure(state: SearchState, action: int) -> int:
+    idx, direction = decode_source_and_direction(action)
+    source_color = state.color_at(idx)
+    value = 0
+    current = idx
+    for _ in range(state.heights[idx]):
+        current = NEXT_INDEX[current][direction]
+        if current == -1:
+            break
+        target_color = state.color_at(current)
+        if target_color != -1 and target_color != source_color:
+            value += state.heights[current]
+    return value
+
+
+def is_terminal(state: SearchState, repetition_counts: defaultdict[int, int]) -> bool:
+    if not state.play_phase:
+        return False
+    if state.red_tokens == 0 or state.blue_tokens == 0:
+        return True
+    if state.turn_count - PLACEMENT_TURNS >= MAX_TURNS:
+        return True
+    if repetition_counts.get(state.hash_key, 0) >= 3:
+        return True
+    return not state.has_legal_actions()
+
+
+def evaluate_board(board: dict[Coord | tuple[int, int], CellState], me: PlayerColor) -> float:
+    state = SearchState.from_sparse(board, 0, me)
+    return float(state.token_count(me.value) - state.token_count(me.opponent.value))
+
+
+def evaluate(
+    state_counter: defaultdict[int, int],
+    board: dict[Coord | tuple[int, int], CellState],
+    turn_count: int,
+    me: PlayerColor,
+    _hsh: tuple | None = None,
+) -> float:
+    state = SearchState.from_sparse(board, turn_count, PlayerColor.RED if turn_count % 2 == 0 else PlayerColor.BLUE)
+    return evaluate_state(state, me.value, state_counter)
+
+
+def evaluate_state(
+    state: SearchState,
+    me: int,
+    repetition_counts: defaultdict[int, int],
+) -> float:
+    opp = BLUE if me == RED else RED
+    my_tokens = state.token_count(me)
+    opp_tokens = state.token_count(opp)
+
+    if state.play_phase:
+        if opp_tokens == 0:
+            return WIN_SCORE
+        if my_tokens == 0:
+            return LOSS_SCORE
+
+        play_turn = state.turn_count - PLACEMENT_TURNS
         if play_turn >= MAX_TURNS:
-            if material_diff > 0:
-                return TURN_LIMIT_WIN_SCORE + material_diff
-            if material_diff < 0:
-                return -TURN_LIMIT_WIN_SCORE + material_diff
+            token_diff = my_tokens - opp_tokens
+            if token_diff > 0:
+                return TURN_LIMIT_WIN_SCORE + token_diff
+            if token_diff < 0:
+                return -TURN_LIMIT_WIN_SCORE + token_diff
             return 0
 
-        if hsh is not None and state_counter.get(hsh, 0) >= 3:
-            return draw_utility(material_diff)
+        repeat_count = repetition_counts.get(state.hash_key, 0)
+        if repeat_count >= 3 or not state.has_legal_actions():
+            return draw_score(my_tokens, opp_tokens)
 
-        if red["mobility"] == 0 or blue["mobility"] == 0:
-            return draw_utility(material_diff)
+    material_weight = 24
+    tactical_weight = 8
+    mobility_weight = 0.5
+    stack_weight = 1.5
+    center_weight = 2.0
+    edge_weight = 1.0
 
-    progress = 0.0
-    if turn_count >= PLACEMENT_TURNS:
-        progress = min(1.0, (turn_count - PLACEMENT_TURNS) / MAX_TURNS)
-
-    material_weight = 16 + 24 * progress
-    center_weight = 5 - 3 * progress
-    tactical_weight = 12
-    mobility_weight = 0.75
-    stack_count_weight = 2.5
-    power_weight = 0.6
-    edge_weight = 1.5
-    initiative_weight = 3
-    repetition_weight = 18
-
-    material_score = material_diff * material_weight
-    center_score = (red["center_control"] - blue["center_control"]) * center_weight
-    tactical_score = (red["capture_value"] - blue["capture_value"]) * tactical_weight
-    mobility_score = (red["mobility"] - blue["mobility"]) * mobility_weight
-    stack_count_score = (red["stacks"] - blue["stacks"]) * stack_count_weight
-    power_score = (red["stack_power"] - blue["stack_power"]) * power_weight
-    edge_score = (blue["edge_exposure"] - red["edge_exposure"]) * edge_weight
-
-    side_to_move = PlayerColor.RED if turn_count % 2 == 0 else PlayerColor.BLUE
-    initiative_score = red["capture_value"] if side_to_move == PlayerColor.RED else -blue["capture_value"]
-    initiative_score *= initiative_weight
-
-    repetition_score = 0
-    if hsh is not None:
-        repeat_count = state_counter.get(hsh, 0)
-        if repeat_count > 1:
-            repetition_score = -material_diff * repetition_weight * (repeat_count - 1)
+    mine = _feature_vector(state, me)
+    theirs = _feature_vector(state, opp)
+    repetition_score = repetition_bias(my_tokens, opp_tokens) * max(0, repetition_counts.get(state.hash_key, 0) - 1)
 
     return (
-        material_score
-        + center_score
-        + tactical_score
-        + mobility_score
-        + stack_count_score
-        + power_score
-        + edge_score
-        + initiative_score
+        (my_tokens - opp_tokens) * material_weight
+        + (mine.capture_value - theirs.capture_value) * tactical_weight
+        + (mine.mobility - theirs.mobility) * mobility_weight
+        + (mine.stacks - theirs.stacks) * stack_weight
+        + (mine.center_control - theirs.center_control) * center_weight
+        + (theirs.edge_exposure - mine.edge_exposure) * edge_weight
         + repetition_score
     )
 
 
-# helper function
-
-def weighting_from_center(coord: Coord) -> float:
-    """
-    Return a weighting based on distance from the centre of the board, used to break ties during placement phase.
-    Returns higher values for coordinates closer to the centre, lower values for coordinates further from the centre.
-    """
-    center = (3.5, 3.5)
-    distance = (abs(coord[0] - center[0]) + abs(coord[1] - center[1]))
-    return 1 / (1 + distance)
+@dataclass(slots=True)
+class _FeatureVector:
+    stacks: int = 0
+    mobility: int = 0
+    capture_value: int = 0
+    center_control: float = 0.0
+    edge_exposure: float = 0.0
 
 
-def board_features(board: dict[Coord, CellState]) -> dict[PlayerColor, dict[str, float]]:
-    """
-    Extract low-cost tactical / positional features for both players in one pass.
+def _feature_vector(state: SearchState, color: int) -> _FeatureVector:
+    result = _FeatureVector()
+    own_bits = state.red_bits if color == RED else state.blue_bits
+    capture_targets = 0
+    bits = own_bits
 
-    `capture_value` counts unique immediately capturable enemy tokens, so a
-    target threatened by two stacks is not double-counted.  `mobility` mirrors
-    the legal move categories without constructing full Action objects, which
-    keeps leaf evaluation much cheaper than repeatedly calling `legal_actions`.
-    """
-    features: dict[PlayerColor, dict[str, float]] = {
-        PlayerColor.RED: {
-            "tokens": 0,
-            "stacks": 0,
-            "stack_power": 0,
-            "center_control": 0.0,
-            "edge_exposure": 0.0,
-            "mobility": 0,
-            "capture_value": 0,
-        },
-        PlayerColor.BLUE: {
-            "tokens": 0,
-            "stacks": 0,
-            "stack_power": 0,
-            "center_control": 0.0,
-            "edge_exposure": 0.0,
-            "mobility": 0,
-            "capture_value": 0,
-        },
-    }
-    capture_targets: dict[PlayerColor, set[Coord]] = {
-        PlayerColor.RED: set(),
-        PlayerColor.BLUE: set(),
-    }
+    while bits:
+        bit = bits & -bits
+        idx = bit.bit_length() - 1
+        height = state.heights[idx]
+        result.stacks += 1
+        result.center_control += CENTER_WEIGHTS[idx] * height
+        result.edge_exposure += EDGE_WEIGHTS[idx] * height
+        if height >= 2:
+            result.mobility += 4
 
-    for coord, cell in board.items():
-        color_features = features[cell.color]
-        color_features["tokens"] += cell.height
-        color_features["stacks"] += 1
-        color_features["stack_power"] += cell.height * cell.height
-        color_features["center_control"] += weighting_from_center(coord) * cell.height
-        color_features["edge_exposure"] += edge_exposure(coord) * cell.height
-
-        if cell.height > 1:
-            color_features["mobility"] += len(CARDINAL_DIRECTIONS)
-
-        for direction in CARDINAL_DIRECTIONS:
-            target = step(coord, direction)
-            if target is None:
+        for direction in range(4):
+            target = NEXT_INDEX[idx][direction]
+            if target == -1:
                 continue
+            target_color = state.color_at(target)
+            if target_color == -1 or target_color == color:
+                result.mobility += 1
+            elif height >= state.heights[target]:
+                result.mobility += 1
+                capture_targets |= 1 << target
 
-            target_cell = board.get(target)
-            if target_cell is None or target_cell.color == cell.color:
-                color_features["mobility"] += 1
-            elif cell.height >= target_cell.height:
-                color_features["mobility"] += 1
-                capture_targets[cell.color].add(target)
+        bits ^= bit
 
-    for color, targets in capture_targets.items():
-        features[color]["capture_value"] = sum(board[target].height for target in targets)
-
-    return features
-
-
-def edge_exposure(coord: Coord) -> float:
-    """
-    Penalise material that is easy to push off the board with a cascade.
-
-    Edge squares are most exposed; squares one step in are still slightly risky.
-    Deeper interior squares get no penalty here because center control already
-    handles their positional value.
-    """
-    edge_distance = min(
-        coord[0],
-        coord[1],
-        BOARD_N - 1 - coord[0],
-        BOARD_N - 1 - coord[1],
-    )
-    if edge_distance == 0:
-        return 1.0
-    if edge_distance == 1:
-        return 0.5
-    return 0.0
+    while capture_targets:
+        bit = capture_targets & -capture_targets
+        idx = bit.bit_length() - 1
+        result.capture_value += state.heights[idx]
+        capture_targets ^= bit
+    return result
 
 
-def draw_utility(material_diff: float) -> float:
-    """
-    Treat a draw as slightly unattractive for the materially leading side.
+def draw_score(my_tokens: int, opp_tokens: int) -> int:
+    if my_tokens > opp_tokens:
+        return -DRAW_BIAS
+    if my_tokens < opp_tokens:
+        return DRAW_BIAS
+    return 0
 
-    The official game result is still a draw, but this search bias prevents the
-    agent from cashing out winning positions into repeated shuffles simply
-    because the raw utility of the repeated state is 0.
-    """
-    return -25 if material_diff > 0 else 25 if material_diff < 0 else 0
+
+def repetition_bias(my_tokens: int, opp_tokens: int) -> int:
+    if my_tokens > opp_tokens:
+        return -REPETITION_WEIGHT
+    if my_tokens < opp_tokens:
+        return REPETITION_WEIGHT
+    return 0
+
+
+def _pop_repetition(repetition_counts: defaultdict[int, int], key: int) -> None:
+    count = repetition_counts.get(key, 0)
+    if count <= 1:
+        repetition_counts.pop(key, None)
+    else:
+        repetition_counts[key] = count - 1

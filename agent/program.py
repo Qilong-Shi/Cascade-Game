@@ -1,117 +1,97 @@
 # COMP30024 Artificial Intelligence, Semester 1 2026
 # Project Part B: Game Playing Agent
 
+from __future__ import annotations
+
 import os
-from .moves import apply_action, legal_actions, simple_board_hash
-from referee.game import PlayerColor, Action, PLACEMENT_TURNS
-
+import time
 from collections import defaultdict
-from .minimax import alpha_beta
-from .utils import rewrap_action, unwrap_action
 
-DEFAULT_DEPTH = 3
+from referee.game import Action, PLACEMENT_TURNS, PlayerColor
+
+from .minimax import iterative_deepening_search
+from .search_state import (
+    SearchState,
+    decode_referee_action,
+    encode_referee_action,
+)
+
+
+DEFAULT_MAX_DEPTH = 8
+DEFAULT_MOVE_BUDGET_SECONDS = 0.50
+
 
 class Agent:
     """
-    This class is the "entry point" for your agent, providing an interface to
-    respond to various Cascade game events.
+    Referee-facing agent wrapper around the packed mutable search engine.
     """
 
     def __init__(self, color: PlayerColor, **_referee: dict):
-        """
-        This constructor method runs when the referee instantiates the agent.
-        Any setup and/or precomputation should be done here.
-        """
         self._color = color
-        self._turn_count = 0
-        self.board = {}
-        self.state_counter = defaultdict(int)
-
-        # Use the environment override only as a maximum. The agent still caps
-        # search dynamically so it can return before Gradescope timeouts.
-        self.depth = int(os.environ.get(f"{color.name}_DEPTH", DEFAULT_DEPTH))
+        self.state = SearchState.empty()
+        self.repetition_counts: defaultdict[int, int] = defaultdict(int)
+        self.max_depth = int(os.environ.get(f"{color.name}_DEPTH", os.environ.get("AGENT_MAX_DEPTH", DEFAULT_MAX_DEPTH)))
+        self.default_move_budget = float(os.environ.get("AGENT_MOVE_BUDGET", DEFAULT_MOVE_BUDGET_SECONDS))
         self.debug = os.environ.get("AGENT_DEBUG") == "1"
-        self._debug(f"Playing as {color.name}, max_depth={self.depth}")
+        self._debug(
+            f"Playing as {color.name}, max_depth={self.max_depth}, "
+            f"default_move_budget={self.default_move_budget:.2f}s"
+        )
 
     def action(self, **_referee: dict) -> Action | None:
-        """
-        This method is called by the referee each time it is the agent's turn
-        to take an action. It must always return an action object.
-        """
-        actions = legal_actions(self.board, self._color, self._turn_count)
+        actions = self.state.generate_actions()
         if not actions:
             return None
 
-        if self._turn_count < PLACEMENT_TURNS:
-            best_action = self._choose_placement(actions)
-            return rewrap_action(best_action)
+        if self.state.turn_count < PLACEMENT_TURNS:
+            return decode_referee_action(self._choose_placement(actions))
 
-        depth = self._effective_depth(len(actions), _referee.get("time_remaining"))
-        best_action = alpha_beta(
-            self.state_counter,
-            self.board,
-            depth,
+        move_budget = self._move_budget(_referee.get("time_remaining"))
+        deadline = time.perf_counter() + move_budget
+        value, best_action, stats = iterative_deepening_search(
+            self.state,
+            self.repetition_counts,
             self._color,
-            self._turn_count,
-            float('-inf'),
-            float('inf')
-        )[1]
+            self.max_depth,
+            deadline,
+        )
         if best_action is None:
             best_action = actions[0]
-        return rewrap_action(best_action)
 
-    def update(self, color: PlayerColor, action: Action, **referee: dict):
-        """
-        This method is called by the referee after a player has taken their
-        turn. You should use it to update the agent's internal game state.
-        """
-        action = unwrap_action(action)
+        self._debug(
+            f"search value={value:.1f}, depth={stats.completed_depth}, nodes={stats.nodes}, "
+            f"cutoffs={stats.cutoffs}, tt_hits={stats.tt_hits}, move_budget={move_budget:.3f}s"
+        )
+        return decode_referee_action(best_action)
 
-        # Store current board state
-        self.state_counter[simple_board_hash(self.board, self._turn_count)] += 1
-
-        # Increment turn count
-        self._turn_count += 1
-
-        # Update board:
-        self.board = apply_action(self.board, action, color)
-
-        if self.debug:
+    def update(self, color: PlayerColor, action: Action, **_referee: dict) -> None:
+        encoded = encode_referee_action(action)
+        if self.state.side_to_move != color.value:
             self._debug(
-                f"{color.name} played {type(action).__name__}; "
-                f"time={referee.get('time_remaining')}s; "
-                f"memory={referee.get('space_remaining')}MB"
+                f"state side mismatch before update: expected {self.state.side_to_move}, got {color.value}"
             )
+        self.state.make_move(encoded)
+        if self.state.play_phase:
+            self.repetition_counts[self.state.hash_key] += 1
 
-    def _choose_placement(self, actions: list[Action]) -> Action:
-        """
-        Pick a legal placement quickly. Searching the full placement tree has
-        very high branching and was the source of timeout failures.
-        """
-        def placement_score(action: Action) -> tuple[float, int, int]:
-            coord = action.coord
-            row = coord[0]
-            col = coord[1]
+    def _choose_placement(self, actions: list[int]) -> int:
+        def placement_score(action: int) -> tuple[float, int]:
+            row, col = divmod(action, 8)
             distance = abs(row - 3.5) + abs(col - 3.5)
-            return (-distance, row, col)
+            return (-distance, -action)
 
         return max(actions, key=placement_score)
 
-    def _effective_depth(self, action_count: int, time_remaining: float | None) -> int:
-        depth = max(1, self.depth)
-
-        if action_count > 24:
-            depth = min(depth, 2)
-        elif action_count > 12:
-            depth = min(depth, 3)
-
-        if time_remaining is not None:
-            if time_remaining < 10:
-                depth = 1
-            elif time_remaining < 40:
-                depth = min(depth, 2)
-
-        return depth
+    def _move_budget(self, time_remaining: float | None) -> float:
+        if time_remaining is None:
+            return self.default_move_budget
+        if time_remaining <= 2:
+            return 0.02
+        if time_remaining <= 10:
+            return min(self.default_move_budget, 0.08)
+        if time_remaining <= 30:
+            return min(self.default_move_budget, 0.20)
+        return min(self.default_move_budget, max(0.05, time_remaining / 240))
 
     def _debug(self, message: str) -> None:
         if self.debug:

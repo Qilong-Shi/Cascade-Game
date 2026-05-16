@@ -17,6 +17,7 @@ GENERATED_FILE_PATTERNS = (
     "*.log",
     "expanded_run.out",
     "expanded_run.err",
+    "*.txt",
 )
 GENERATED_DIR_NAMES = ("__pycache__",)
 

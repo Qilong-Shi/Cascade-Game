@@ -17,13 +17,10 @@ class Agent:
         scored = []
         for action in actions:
             board = apply_action(self._board, action, self._color)
-            score = evaluate(defaultdict(int), board, self._turn_count + 1)
+            score = evaluate(defaultdict(int), board, self._turn_count + 1, self._color)
             scored.append((score, action))
 
-        if self._color == PlayerColor.RED:
-            best_action = max(scored, key=lambda item: item[0])[1]
-        else:
-            best_action = min(scored, key=lambda item: item[0])[1]
+        best_action = max(scored, key=lambda item: item[0])[1]
 
         return rewrap_action(best_action)
 
