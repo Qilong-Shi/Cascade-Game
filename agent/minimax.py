@@ -1,7 +1,19 @@
-from .moves import apply_action, legal_actions, is_game_over, simple_board_hash
-from referee.game import PlayerColor, Action, Coord, CellState, PLACEMENT_TURNS
+from .moves import apply_action, legal_actions, is_game_over, simple_board_hash, step
+from referee.game import (
+    PlayerColor,
+    Action,
+    Coord,
+    CellState,
+    BOARD_N,
+    PLACEMENT_TURNS,
+    MAX_TURNS,
+    CARDINAL_DIRECTIONS,
+)
 from collections import defaultdict
-from math import exp
+
+
+WIN_SCORE = 100_000
+TURN_LIMIT_WIN_SCORE = 20_000
 
 def push_state(state_counter: defaultdict[int], hsh: tuple) -> None:
     state_counter[hsh] = state_counter.get(hsh, 0) + 1
@@ -63,7 +75,7 @@ def alpha_beta(state_counter: defaultdict[int], board: dict[Coord, CellState], d
         pop_state(state_counter, hsh)
     return best_eval, best_action
 
-# very simple evaluation function, just return difference in number of tokens
+# Lightweight material-only helper kept for tests / quick diagnostics.
 def evaluate_board(board: dict[Coord, CellState]) -> float:
     red_tokens = sum(cell.height for cell in board.values() if cell.color == PlayerColor.RED)                                          
     blue_tokens = sum(cell.height for cell in board.values() if cell.color == PlayerColor.BLUE)
@@ -71,51 +83,86 @@ def evaluate_board(board: dict[Coord, CellState]) -> float:
 
 # returns positive if good for red, negative if good for blue
 def evaluate(state_counter: defaultdict[int], board: dict[Coord, CellState], turn_count: int, hsh: str | None = None) -> float:
+    """
+    Heuristic value from RED's perspective.
 
-    eval_score = 0
+    The old evaluator mostly measured token difference.  That was enough to
+    beat weak play, but it missed the positions that decide Cascade games:
+    immediate captures, mobility, whether strength is concentrated in useful
+    stacks, and whether material is stranded on the board edge where a cascade
+    can remove it cheaply.
+    """
+    features = board_features(board)
+    red = features[PlayerColor.RED]
+    blue = features[PlayerColor.BLUE]
 
-    center_score = 0
-    tie_score = 0
-    diff_score = 0
-    win_score = 0
+    red_tokens = red["tokens"]
+    blue_tokens = blue["tokens"]
+    material_diff = red_tokens - blue_tokens
 
-    turn_limit_score = 0
-    CENTER_WEIGHT = 3
-    TIE_WEIGHT = 5
+    if turn_count >= PLACEMENT_TURNS:
+        if blue_tokens == 0:
+            return WIN_SCORE - turn_count
+        if red_tokens == 0:
+            return -WIN_SCORE + turn_count
 
-    for coord, cell in board.items():
-        color_mult = 1 if cell.color == PlayerColor.RED else -1
-        center_score += color_mult * weighting_from_center(coord) * CENTER_WEIGHT
-    center_score *= 1/300 * (turn_count - 8) + 1 # dropoff function
+        play_turn = turn_count - PLACEMENT_TURNS
+        if play_turn >= MAX_TURNS:
+            if material_diff > 0:
+                return TURN_LIMIT_WIN_SCORE + material_diff
+            if material_diff < 0:
+                return -TURN_LIMIT_WIN_SCORE + material_diff
+            return 0
 
+        if hsh is not None and state_counter.get(hsh, 0) >= 3:
+            return draw_utility(material_diff)
 
-    if turn_count >= 8: # only evaluate win conditions during play phase
-        red_tokens = sum(cell.height for cell in board.values() if cell.color == PlayerColor.RED)
-        blue_tokens = sum(cell.height for cell in board.values() if cell.color == PlayerColor.BLUE)
-        diff_score = red_tokens - blue_tokens
-        if blue_tokens == 0: # winning is best, even better if it wins faster
-            win_score = 1000 - turn_count # arbitrary large value to represent a win
-        if red_tokens == 0: # losing is worst, even worse if it loses faster
-            win_score = -1000 + turn_count # arbitrary large negative value to represent a loss
+        if red["mobility"] == 0 or blue["mobility"] == 0:
+            return draw_utility(material_diff)
 
-        if hsh is not None: # None hsh means still in placement phase
-            push_state(state_counter, hsh) # increment temporarily to check for draw conditions
-            if is_game_over(state_counter, board, turn_count, hsh) and (red_tokens and blue_tokens): # if game finishes from draw
-                tie_score = -TIE_WEIGHT # bad for red, since red wants to win as it has a starting advantage
-                if red_tokens > blue_tokens: # even worse for red since it is winning, it does not want to draw
-                    tie_score -= TIE_WEIGHT
-                else:
-                    tie_score *= -1 # good for red since it is losing, it wants to draw, makes tie_score positive
+    progress = 0.0
+    if turn_count >= PLACEMENT_TURNS:
+        progress = min(1.0, (turn_count - PLACEMENT_TURNS) / MAX_TURNS)
 
-            pop_state(state_counter, hsh) # restore state counter
+    material_weight = 16 + 24 * progress
+    center_weight = 5 - 3 * progress
+    tactical_weight = 12
+    mobility_weight = 0.75
+    stack_count_weight = 2.5
+    power_weight = 0.6
+    edge_weight = 1.5
+    initiative_weight = 3
+    repetition_weight = 18
 
-        # reward turn limit wins since they are the same
+    material_score = material_diff * material_weight
+    center_score = (red["center_control"] - blue["center_control"]) * center_weight
+    tactical_score = (red["capture_value"] - blue["capture_value"]) * tactical_weight
+    mobility_score = (red["mobility"] - blue["mobility"]) * mobility_weight
+    stack_count_score = (red["stacks"] - blue["stacks"]) * stack_count_weight
+    power_score = (red["stack_power"] - blue["stack_power"]) * power_weight
+    edge_score = (blue["edge_exposure"] - red["edge_exposure"]) * edge_weight
 
-        turn_limit_score = diff_score * 1/(1+exp(-0.05*(turn_count-100))) * 100
+    side_to_move = PlayerColor.RED if turn_count % 2 == 0 else PlayerColor.BLUE
+    initiative_score = red["capture_value"] if side_to_move == PlayerColor.RED else -blue["capture_value"]
+    initiative_score *= initiative_weight
 
+    repetition_score = 0
+    if hsh is not None:
+        repeat_count = state_counter.get(hsh, 0)
+        if repeat_count > 1:
+            repetition_score = -material_diff * repetition_weight * (repeat_count - 1)
 
-    eval_score = center_score + tie_score + diff_score + turn_limit_score + win_score
-    return eval_score
+    return (
+        material_score
+        + center_score
+        + tactical_score
+        + mobility_score
+        + stack_count_score
+        + power_score
+        + edge_score
+        + initiative_score
+        + repetition_score
+    )
 
 
 # helper function
@@ -128,3 +175,98 @@ def weighting_from_center(coord: Coord) -> float:
     center = (3.5, 3.5)
     distance = (abs(coord[0] - center[0]) + abs(coord[1] - center[1]))
     return 1 / (1 + distance)
+
+
+def board_features(board: dict[Coord, CellState]) -> dict[PlayerColor, dict[str, float]]:
+    """
+    Extract low-cost tactical / positional features for both players in one pass.
+
+    `capture_value` counts unique immediately capturable enemy tokens, so a
+    target threatened by two stacks is not double-counted.  `mobility` mirrors
+    the legal move categories without constructing full Action objects, which
+    keeps leaf evaluation much cheaper than repeatedly calling `legal_actions`.
+    """
+    features: dict[PlayerColor, dict[str, float]] = {
+        PlayerColor.RED: {
+            "tokens": 0,
+            "stacks": 0,
+            "stack_power": 0,
+            "center_control": 0.0,
+            "edge_exposure": 0.0,
+            "mobility": 0,
+            "capture_value": 0,
+        },
+        PlayerColor.BLUE: {
+            "tokens": 0,
+            "stacks": 0,
+            "stack_power": 0,
+            "center_control": 0.0,
+            "edge_exposure": 0.0,
+            "mobility": 0,
+            "capture_value": 0,
+        },
+    }
+    capture_targets: dict[PlayerColor, set[Coord]] = {
+        PlayerColor.RED: set(),
+        PlayerColor.BLUE: set(),
+    }
+
+    for coord, cell in board.items():
+        color_features = features[cell.color]
+        color_features["tokens"] += cell.height
+        color_features["stacks"] += 1
+        color_features["stack_power"] += cell.height * cell.height
+        color_features["center_control"] += weighting_from_center(coord) * cell.height
+        color_features["edge_exposure"] += edge_exposure(coord) * cell.height
+
+        if cell.height > 1:
+            color_features["mobility"] += len(CARDINAL_DIRECTIONS)
+
+        for direction in CARDINAL_DIRECTIONS:
+            target = step(coord, direction)
+            if target is None:
+                continue
+
+            target_cell = board.get(target)
+            if target_cell is None or target_cell.color == cell.color:
+                color_features["mobility"] += 1
+            elif cell.height >= target_cell.height:
+                color_features["mobility"] += 1
+                capture_targets[cell.color].add(target)
+
+    for color, targets in capture_targets.items():
+        features[color]["capture_value"] = sum(board[target].height for target in targets)
+
+    return features
+
+
+def edge_exposure(coord: Coord) -> float:
+    """
+    Penalise material that is easy to push off the board with a cascade.
+
+    Edge squares are most exposed; squares one step in are still slightly risky.
+    Deeper interior squares get no penalty here because center control already
+    handles their positional value.
+    """
+    edge_distance = min(
+        coord[0],
+        coord[1],
+        BOARD_N - 1 - coord[0],
+        BOARD_N - 1 - coord[1],
+    )
+    if edge_distance == 0:
+        return 1.0
+    if edge_distance == 1:
+        return 0.5
+    return 0.0
+
+
+def draw_utility(material_diff: float) -> float:
+    """
+    Treat a draw as slightly unattractive for the materially leading side.
+
+    The official game result is still a draw, but this search bias prevents the
+    agent from cashing out winning positions into repeated shuffles simply
+    because the raw utility of the repeated state is 0.
+    """
+    return -25 if material_diff > 0 else 25 if material_diff < 0 else 0
