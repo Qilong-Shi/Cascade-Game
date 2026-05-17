@@ -3,16 +3,10 @@
 .claude/
 
 # files
-_report_tests/
-tic-tac-toe-final.py
-robot-search.py
 part_b.pdf
 referee/
 output.ans
 profile.out
-
-battlefield_arena/
-battlefield_page/
 
 # Python cache files
 __pycache__/
