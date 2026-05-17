@@ -84,15 +84,18 @@ class Agent:
         return max(actions, key=placement_score)
 
     def _move_budget(self, time_remaining: float | None) -> float:
+        play_turn = max(0, self.state.turn_count - PLACEMENT_TURNS)
+        early_play_multiplier = 2.5 if play_turn < 4 else 1.5 if play_turn < 8 else 1.0
+
         if time_remaining is None:
-            return self.default_move_budget
+            return self.default_move_budget * early_play_multiplier
         if time_remaining <= 2:
             return 0.02
         if time_remaining <= 10:
-            return min(self.default_move_budget, 0.08)
+            return min(self.default_move_budget * early_play_multiplier, 0.08)
         if time_remaining <= 30:
-            return min(self.default_move_budget, 0.20)
-        return min(self.default_move_budget, max(0.05, time_remaining / 240))
+            return min(self.default_move_budget * early_play_multiplier, 0.20)
+        return min(self.default_move_budget * early_play_multiplier, max(0.05, time_remaining / 240))
 
     def _debug(self, message: str) -> None:
         if self.debug:
